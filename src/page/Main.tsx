@@ -49,6 +49,7 @@ const Main = ({ isMobile }: isMobileProps) => {
 				console.error('메인 비주얼 API 호출 실패:', err);
 			}
 		};
+		console.log(isMobile);
 
 		fetchListData();
 	}, []);

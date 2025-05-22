@@ -1,0 +1,161 @@
+@use './import' as *;
+
+.aboutBox{
+	.aboutBox__sectionInner{
+		max-width: 1776px;
+		margin: auto;
+	}
+	.aboutBox__section--1{
+		.txtBox{
+			display: flex;
+			justify-content: center;
+			align-items: stretch;
+			gap: 16px;
+			.left{
+				flex: 1;
+				p{
+					font-size: 20px;
+					font-weight: 500;
+					color: #8A8A8A;
+					padding-left: 168px;
+					box-sizing: border-box;
+				}
+			}
+			.right{
+				flex: 1.4719;
+				dl{
+					dt{
+						font-size: 40px;
+						font-weight: 600;
+					}
+					dd{
+						margin-top: 20px;
+						font-size: 40px;
+						font-weight: 500;
+						color: $font-color-gray;
+					}
+				}
+			}
+		}
+		.imgBox{
+			display: flex;
+			justify-content: center;
+			gap: 16px;
+			margin-top: 100px;
+		}
+	}
+	.aboutBox__section--2{
+		margin-top: 92px;
+		background: linear-gradient(to bottom, #15110F, #1B1513);
+		.txtBox{
+			dl{
+				padding-top: 200px;
+				padding-left: 728px;
+				box-sizing: border-box;
+				dt{
+					font-size: 48px;
+					font-weight: 500;
+					color: $font-color-white;
+				}
+				dd{
+					font-size: 20px;
+					color: #aaa;
+					margin-top: 32px;
+				}
+			}
+		}
+		.imgBox{
+			margin-top: 14px;
+		}
+	}
+	.aboutBox__section--3{
+		background-color: #F4F4F5;
+		.aboutBox__sectionInner{
+			display: flex;
+			align-items: flex-end;
+			padding: 160px 0 170px;
+			.left{
+				flex: 1;
+				text-align: center;
+			}
+			.right{
+				flex: 1.4719;
+				.speechBubbleBox{
+					.speechBubble{
+						position: relative;
+						&::after{
+							content: "";
+							position: absolute;
+							width: 28px;
+							height: 56px;
+							z-index: 1;
+
+						}
+						p{
+							font-size: 32px;
+							font-weight: 500;
+							line-height: 52px;
+							text-align: center;
+						}
+						&.black{
+							background-color: $font-color-default;
+							padding: 48px 0;
+							border-radius:74px;
+							&::after{
+								bottom: -28px;
+								left: 100px;
+								background-color: $font-color-default;
+								border-top-right-radius: 28px;
+								border-bottom-right-radius: 28px;
+							}
+							p{
+								color: $font-color-white;
+							}
+						}
+						&.white{
+							background-color: $font-color-white;
+							padding: 80px 0;
+							border-radius:74px;
+							&::after{
+								bottom: -28px;
+								right: 100px;
+								background-color: $font-color-white;
+								border-top-left-radius: 28px;
+								border-bottom-left-radius: 28px;
+							}
+							p{
+								color: $font-color-default;
+							}
+						}
+					}
+				}
+				.profileBox{
+						margin-top: 88px;
+						display: flex;
+						flex-direction: column;
+						gap: 40px;
+					dl{
+						padding-left: 36px;
+						box-sizing: border-box;
+						display: flex;
+						gap: 20px;
+						align-items: center;
+						dd{
+							font-size: 16px;
+							font-weight: 500;
+							color: #8A8A8A;
+							span{
+								display: block;
+								margin-bottom: 10px;
+								color: $font-color-default;
+								font-weight: 600;
+								font-size: 18px;
+							}
+						}
+					}
+
+				}
+			}
+		}
+	}
+}

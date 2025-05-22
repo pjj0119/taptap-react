@@ -2,8 +2,11 @@ import { Link } from 'react-router-dom';
 
 type HeaderMoGnbProps = {
 	setIsClicked: (isClicked: boolean) => void;
+	pageTit: string;
 }
-const HeaderMoGnb = ({ setIsClicked }: HeaderMoGnbProps) => {
+
+
+const HeaderMoGnb = ({ setIsClicked , pageTit }: HeaderMoGnbProps) => {
 	return (
 
 		<div className="header__MoGnb">
@@ -16,10 +19,10 @@ const HeaderMoGnb = ({ setIsClicked }: HeaderMoGnbProps) => {
 			<nav className="header__MoGnb__list">
 
 				<ul>
-					<li><Link to="/" onClick={() => setIsClicked(false)}>TAPTAP</Link></li>
-					<li><Link to="Magazine" onClick={() => setIsClicked(false)}>MAGAZINE</Link></li>
-					<li><Link to="Archive" onClick={() => setIsClicked(false)}>ARCHIVE</Link></li>
-					<li><Link to="About" onClick={() => setIsClicked(false)}>ABOUT</Link></li>
+					<li><Link to="/" className={`${pageTit == '/' &&'on' }`} onClick={() => setIsClicked(false) }>TAPTAP</Link></li>
+					<li><Link to="Magazine" className={`${pageTit == 'Magazine' &&'on' }`} onClick={() => setIsClicked(false) }>MAGAZINE</Link></li>
+					<li><Link to="Archive" className={`${pageTit == 'Archive' &&'on' }`} onClick={() => setIsClicked(false) }>ARCHIVE</Link></li>
+					<li><Link to="About" className={`${pageTit == 'About' &&'on' }`} onClick={() => setIsClicked(false) }>ABOUT</Link></li>
 				</ul>
 			</nav>
 		</div>

@@ -29,10 +29,10 @@ const Header = ({ isMobile }: isMobileProps) => {
 		<header id='header' className={`header ${pageTit == 'Magazine' ? 'bgwt': ''}`}>
 			<div className='headerInner'>
 				<HeaderLogo />
-				{!isMobile && <HeaderGnb />}
+				{!isMobile && <HeaderGnb pageTit={pageTit} />}
 				{isMobile && <HeaderBtn setIsClicked={setIsClicked} />}
 			</div>
-			{isMobile && isClicked && (<HeaderMoGnb setIsClicked={setIsClicked} />)}
+			{isMobile && isClicked && (<HeaderMoGnb setIsClicked={setIsClicked} pageTit={pageTit}/>)}
 		</header>
 	)
 }

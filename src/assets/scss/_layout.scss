@@ -198,6 +198,11 @@ body{
     padding-top: 184px;
 	margin: auto;
 	box-sizing: border-box;
+	&.about{
+		max-width: none;
+		padding-left: 0;
+		padding-right: 0;
+	}
 }
 
 /* 1025 ~ 1279 */
@@ -350,6 +355,14 @@ body{
 					display: flex;
 					flex-direction: column;
 					gap: 12px;
+					
+					&:has(.on) {
+						li {
+							a:not(.on) {
+								color: $font-color-gray;
+							}
+						}
+					}
 
 					li {
 						a {
