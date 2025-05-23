@@ -36,6 +36,23 @@ const MainVisual = ({ listDatas }: MainVisualProps) => {
 	
   	const location = useLocation();
 	
+	const headerHandler = () => {
+
+		const header = document.querySelector('.header') as HTMLElement | null;
+		const headerLogo = document.querySelector('.header__logo') as HTMLElement | null;
+		const viewBtn = document.querySelector('.mainViewAllBtn') as HTMLElement | null;
+
+		if (header) {
+			gsap.set(header, { clearProps: 'all' });
+		}
+		if (headerLogo) {
+			headerLogo.classList.remove('white');
+		}
+		if (viewBtn) {
+			gsap.set(viewBtn, { clearProps: 'all' });
+			viewBtn.classList.remove('noFixed');
+		}
+	}
 
 	useEffect(() => {
 		const killList: ScrollTrigger[] = [];
@@ -62,7 +79,6 @@ const MainVisual = ({ listDatas }: MainVisualProps) => {
 			if (!e) return;
 
 			const txtcolor = e.dataset.txtcolor;
-			const bgcolor = e.dataset.bgcolor;
 
 			const mainTrigger = ScrollTrigger.create({
 				trigger: e,
@@ -83,18 +99,26 @@ const MainVisual = ({ listDatas }: MainVisualProps) => {
 				start: `top top+=${headerHeight}`,
 				end: `bottom top+=${headerHeight}`,
 				onEnter: () => {
-				if (header && txtcolor) {
-					header.style.color = txtcolor;
-					headerLogo?.classList.toggle('white', txtcolor.toLowerCase() === 'white');
-				}
-				if (header && bgcolor) header.style.backgroundColor = bgcolor;
+					if (header && txtcolor) {
+						header.style.color = txtcolor;
+						headerLogo?.classList.toggle('white', txtcolor.toLowerCase() === 'white');
+						e.classList.add('active');
+					}
 				},
 				onEnterBack: () => {
-				if (header && txtcolor) {
-					header.style.color = txtcolor;
-					headerLogo?.classList.toggle('white', txtcolor.toLowerCase() === 'white');
-				}
-				if (header && bgcolor) header.style.backgroundColor = bgcolor;
+					if (header && txtcolor) {
+						header.style.color = txtcolor;
+						headerLogo?.classList.toggle('white', txtcolor.toLowerCase() === 'white');
+						e.classList.add('active');
+					}
+				},
+				
+				onLeave: () => {
+					e.classList.remove('active');
+				},
+
+				onLeaveBack: () => {
+					e.classList.remove('active');
 				},
 			});
 
@@ -128,28 +152,21 @@ const MainVisual = ({ listDatas }: MainVisualProps) => {
 			killList.push(mainTrigger, headerTrigger, viewBtnTrigger, unfixBtnTrigger);
 			});
 
-			window.addEventListener('resize', handleResize);
+			window.addEventListener('resize', () => {
+				handleResize();
+				headerHandler();
+			});
 			ScrollTrigger.refresh();
 		});
 
 		return () => {
 			killList.forEach(t => t.kill());
-			window.removeEventListener('resize', handleResize);
+			
+			window.removeEventListener('resize', () => {
+				handleResize();
+				headerHandler();
+			});
 
-			const header = document.querySelector('.header') as HTMLElement | null;
-			const headerLogo = document.querySelector('.header__logo') as HTMLElement | null;
-			const viewBtn = document.querySelector('.mainViewAllBtn') as HTMLElement | null;
-
-			if (header) {
-			gsap.set(header, { clearProps: 'all' });
-			}
-			if (headerLogo) {
-			headerLogo.classList.remove('white');
-			}
-			if (viewBtn) {
-			gsap.set(viewBtn, { clearProps: 'all' });
-			viewBtn.classList.remove('noFixed');
-			}
 		};
 	}, [listDatas?.length, location.pathname]);
 

@@ -16,7 +16,6 @@ type MainVisualItemType = {
 	taptapSeq : number ;
 };
 
-
 const Main = ({ isMobile }: isMobileProps) => {
 
 	const [magazineList, setMagazineList] = useState<MainVisualItemType[]>([]);
@@ -53,6 +52,7 @@ const Main = ({ isMobile }: isMobileProps) => {
 
 		fetchListData();
 	}, []);
+
 	return (
 		<div id="contents" className="main">
 			<div className="mainBox">

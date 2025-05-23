@@ -3,16 +3,248 @@
 .archive {
 	.archiveBox{
 		display: flex;
+		max-width: 1440px;
+		height: calc(100dvh - 385px);
+		justify-content: space-between;
+		gap: 160px;
+		&__lnb{
+			flex-grow: 0;
+			flex-shrink: 0;
+			flex-basis: 400px;
+			&__tit{
+				p{
+					font-size: 40px;
+					font-weight: 600;
+					padding-bottom: 40px;
+					border-bottom: 1px solid $font-color-default;
+				}
+			}
+			&__listBox{
+				height: calc(100% - 89px);
+				overflow-y: auto;
+				@include customScroll;
+			}
+			&__list{
+				display: flex;
+				gap: 16px;
+				align-items: stretch;
+				padding: 16px 0 36px;
+				box-sizing: border-box;
+				& + .archiveBox__lnb__list{
+					border-top: 1px solid #ddd;
+				}
+				&__tit{
+					flex-grow: 0;
+					flex-shrink: 0;
+					flex-basis: 64px;
+					color: $font-color-gray;
+					font-size: 20px;
+					font-weight: 700;
+				}
+				&__item{
+					ul{
+						display: flex;
+						flex-direction: column;
+						gap: 16px;
+						li{
+							font-size: 20px;
+							cursor: pointer;
+						}
+					}
+				}
+			}
+		}
+		&__con{
+			flex: 1;
+			&__tit{
+				p{
+					font-size: 40px;
+					font-weight: 600;
+					padding-bottom: 40px;
+				}
+			}
+			&__listBox{
+				display: flex;
+				flex-direction: column;
+				gap: 80px;
+				height: calc(100% - 89px);
+				overflow-y: auto;
+				@include customScroll;
+			}
+			&__list{
+				&__tit{
+					font-size: 40px;
+					font-weight: 600;
+					padding-bottom: 40px;
+				}
+				& > ul{
+					display: flex;
+					flex-direction: column;
+					gap: 40px;
+					& > li{
+						display: flex;
+						align-items: center;
+						gap: 40px;
+					}
+				}
+				& + .archiveBox__con__list{
+					padding-top: 80px;
+					border-top: 1px solid #eee;
+				}
+				&__item{
+					&__img{
+						font-size: 0;
+						flex-shrink: 0;
+						flex-grow: 0;
+						flex-basis: 180px;
+					}
+					&__txt{
+						flex: 1;
+						dl{
+							dt{
+								font-size: 24px;
+								font-weight: 500;
+							}
+							dd{
+								margin-top: 8px;
+								font-size: 18px;
+								color: $font-color-gray;
+							}
+						}
+						.linkBox{
+							margin-top: 56px;
+							display: flex;
+							gap: 8px;
+							flex-wrap: wrap;
+							li{
+								flex: 1;
+								min-width: calc(50% - 4px);
+								a{
+									display: block;
+									font-size: 16px;
+									padding: 10px 20px;
+									background-color: #F8F8F8;
+									position: relative;
+									&::after{
+										content: '';
+										position: absolute;
+										top: 50%;
+										transform: translateY(-50%); ;
+										right: 20px;
+										width: 24px;
+										height: 24px;
+										background: url("/static/front/images/common/ico_arrw_right_long.png") center / 100% no-repeat;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 }
-
+@mixin tabletPublic {
+	.archive {
+		.archiveBox{
+			gap: 96px;
+			&__lnb{
+				flex-basis: 256px;
+				&__tit{
+					p{
+						font-size: 28px;
+						padding-bottom: 32px;
+					}
+				}
+				&__list{
+					&__tit{
+						flex-basis: 56px;
+						font-size: 18px;
+					}
+					&__item{
+						ul{
+							li{
+								font-size: 18px;
+							}
+						}
+					}
+				}
+			}
+			
+			&__con{
+				&__tit{
+					p{
+						font-size: 28px;
+						padding-bottom: 32px;
+					}
+				}
+				&__listBox{
+					gap: 64px;
+					height: calc(100% - 88px);
+					overflow-y: auto;
+					@include customScroll;
+				}
+				&__list{
+					&__tit{
+						font-size: 28px;
+						padding-bottom: 40px;
+					}
+					& > ul{
+						gap: 32px;
+						& > li{
+							gap: 32px;
+						}
+					}
+					& + .archiveBox__con__list{
+						padding-top: 64px;
+					}
+					&__item{
+						&__img{
+							flex-basis: 140px;
+						}
+						&__txt{
+							dl{
+								dt{
+									font-size: 18px;
+								}
+								dd{
+									margin-top: 6px;
+									font-size: 16px;
+								}
+							}
+							.linkBox{
+								margin-top: 48px;
+								li{
+									min-width: calc(50% - 4px);
+									a{
+										font-size: 13px;
+										padding: 7px 12px;
+										&::after{
+											right: 12px;
+											width: 20px;
+											height: 20px;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
 /* 1025 ~ 1279 */
-@include tablet-landscape {}
+@include tablet-landscape {
+	@include tabletPublic;
+}
 
 /* 768 ~ 1024 */
 @include tablet {
+	@include tabletPublic;
 }
 	
 /*  ~ 767 */
 @include mobile {
+	
 }

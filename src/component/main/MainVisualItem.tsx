@@ -18,7 +18,6 @@ const MainVisualItem = forwardRef<HTMLDivElement, MainVisualItemType>(
 			className="mainBox__visual__con"
 			style={{ backgroundColor: bgColor }}
 			data-txtcolor={txtColor}
-			data-bgcolor={bgColor}
 			ref={ref}
 		>
 			<div className="mainBox__visual__conSticky">

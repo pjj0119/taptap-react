@@ -59,8 +59,8 @@ function App() {
 		  <Route path="/" element={<Main isMobile={isMobile} />} />
 		  <Route path="/Magazine" element={<Magazine />} />
 		  <Route path="/Magazine/:pageNum" element={<MagazineView />} />
-		  <Route path="/Archive" element={<Archive />} />
-		  <Route path="/About" element={<About />} />
+		  <Route path="/Archive" element={<Archive isMobile={isMobile}/>} />
+		  <Route path="/About" element={<About isMobile={isMobile}/>} />
 		  <Route path="*" element={<NotFound />} />
 		</Routes>
 	  </Layout>

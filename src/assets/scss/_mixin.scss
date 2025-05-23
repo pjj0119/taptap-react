@@ -105,3 +105,44 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+
+@mixin customScroll {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  scrollbar-gutter: stable;
+
+  transition: all 0.3s linear;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  &:hover {
+    scrollbar-width: thin;
+    scrollbar-color: #888 #eee;
+  }
+
+  &:hover::-webkit-scrollbar {
+    opacity: 1;
+  }
+
+  &:hover::-webkit-scrollbar-track {
+    background: #eee;
+  }
+}
