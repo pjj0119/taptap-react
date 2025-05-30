@@ -11,7 +11,7 @@ const Footer = ({ isMobile }: isMobileProps) => {
 			<div className="footerInner">
 				<div className="footerInner__con footerInner__con--left">
 					<div className="footerInner__con__logo">
-						<Link to="https://www.inpix.com/"><img src={`/static/front/images/common/logo_inpix.png`} alt="" /></Link>
+						<Link to="https://www.inpix.com/"><img src={`/front/images/common/logo_inpix.png`} alt="" /></Link>
 					</div>
 					<div className="footerInner__con__address">
 						<p>

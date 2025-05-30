@@ -13,13 +13,13 @@ export default defineConfig({
         assetFileNames: (assetInfo) => {
           const ext = assetInfo.name?.split('.').pop();
 
-          if (ext === 'css') return 'static/front/css/[name]-[hash][extname]';
-          if (ext === 'woff' || ext === 'woff2' || ext === 'ttf' || ext === 'otf') return 'static/front/font/[name]-[hash][extname]';
-          if (ext === 'png' || ext === 'jpg' || ext === 'jpeg' || ext === 'svg' || ext === 'webp' || ext === 'gif') return 'static/front/images/[name]-[hash][extname]';
-          return 'static/front/assets/[name]-[hash][extname]'; // 기타 파일
+          if (ext === 'css') return 'front/css/[name]-[hash][extname]';
+          if (ext === 'woff' || ext === 'woff2' || ext === 'ttf' || ext === 'otf') return 'front/font/[name]-[hash][extname]';
+          if (ext === 'png' || ext === 'jpg' || ext === 'jpeg' || ext === 'svg' || ext === 'webp' || ext === 'gif') return 'front/images/[name]-[hash][extname]';
+          return 'front/assets/[name]-[hash][extname]'; // 기타 파일
         },
-        chunkFileNames: 'static/front/js/[name]-[hash].js',
-        entryFileNames: 'static/front/js/[name]-[hash].js',
+        chunkFileNames: 'front/js/[name]-[hash].js',
+        entryFileNames: 'front/js/[name]-[hash].js',
       },
     },
   },
@@ -34,6 +34,11 @@ export default defineConfig({
         target: 'http://taptap.inpix.com',
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api/, '/taptap'),
+      },
+      '/archiveApi': {
+        target: 'http://taptap.inpix.com',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/archiveApi/, '/front/ajax'),
       },
     },
   },

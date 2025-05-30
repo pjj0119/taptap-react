@@ -114,35 +114,103 @@
   transition: all 0.3s linear;
 
   &::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-    opacity: 0;
-    transition: opacity 0.3s;
+	width: 8px;
+	height: 8px;
+	opacity: 0;
+	transition: opacity 0.3s;
   }
 
   &::-webkit-scrollbar-track {
-    background: transparent;
+	background: transparent;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 10px;
+	background: #888;
+	border-radius: 10px;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: #555;
+	background: #555;
   }
 
   &:hover {
-    scrollbar-width: thin;
-    scrollbar-color: #888 #eee;
+	scrollbar-width: thin;
+	scrollbar-color: #888 #eee;
   }
 
   &:hover::-webkit-scrollbar {
-    opacity: 1;
+	opacity: 1;
   }
 
   &:hover::-webkit-scrollbar-track {
-    background: #eee;
+	background: #eee;
+  }
+}
+
+@mixin fadeIn(
+	$duration: 0.5s, 
+	$delay: 0s, 
+	$timing: linear
+	) {
+	opacity: 0;
+	animation: fadeInOnly $duration $timing $delay forwards;
+
+  @keyframes fadeInOnly {
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+@mixin fadeInMove(
+  $direction: 'up',
+  $duration: 0.5s,
+  $delay: 0s,
+  $distance: 20px,
+  $timing: linear
+) {
+  opacity: 0;
+  transform: translate(0);
+
+  @if $direction == 'up' {
+	transform: translateY($distance);
+	animation: fadeInMove-up $duration $timing $delay forwards;
+  } @else if $direction == 'down' {
+	transform: translateY(-$distance);
+	animation: fadeInMove-down $duration $timing $delay forwards;
+  } @else if $direction == 'left' {
+	transform: translateX($distance);
+	animation: fadeInMove-left $duration $timing $delay forwards;
+  } @else if $direction == 'right' {
+	transform: translateX(-$distance);
+	animation: fadeInMove-right $duration $timing $delay forwards;
+  }
+
+  @keyframes fadeInMove-up {
+	to {
+	  opacity: 1;
+	  transform: translateY(0);
+	}
+  }
+
+  @keyframes fadeInMove-down {
+	to {
+	  opacity: 1;
+	  transform: translateY(0);
+	}
+  }
+
+  @keyframes fadeInMove-left {
+	to {
+	  opacity: 1;
+	  transform: translateX(0);
+	}
+  }
+
+  @keyframes fadeInMove-right {
+	to {
+	  opacity: 1;
+	  transform: translateX(0);
+	}
   }
 }

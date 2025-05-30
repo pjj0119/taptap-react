@@ -1,8 +1,16 @@
 @use './import' as *;
 
+@keyframes  fadeOutIn{
+	0%{opacity: 1;}
+	50%{opacity: 0;}
+	100%{opacity: 1;}
+}
 
 .magazine{
 	.magazineBox{
+		&.active{
+			@include fadeInMove('up', 0.5s, 1s, 50px, linear);
+		}
 		&__list{
 			&__item{
 				padding-bottom: 60px;
@@ -62,10 +70,20 @@
 				}
 			}
 		}
-		&__view{
-			padding-top: 65px;
+		
+		&__sticky{
+			position: sticky;
+			top: 0;
+			left: 0;
+			right: 0;
+			margin: auto;
+			
 			&__info{
-				padding: 80px 0;
+				transition: all .5s;
+				opacity: 1;
+				background-color: $font-color-white;
+				& > div{padding: 80px 0;}
+				&.on{opacity: 0; pointer-events: none;}
 				.tit{
 					font-size: 32px;
 					font-weight: 600;
@@ -83,10 +101,25 @@
 				}
 			}
 			&__infoFix{
-				padding: 18px 60px;
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
+				transition: all .5s;
+				opacity: 1;
+				&.on{opacity: 0;pointer-events: none;}
+				&--tit{
+					position: absolute;
+					left: 0;
+					right: 0;
+					margin: auto;
+					opacity: 0;
+					transition: all .5s;
+					&.on{opacity: 1;pointer-events: all;}
+				}
+				& .flex{
+					padding: 18px 60px;
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					background-color: $font-color-white;
+				}
 				&__left{
 					display: flex;
 					gap: 12px;
@@ -106,7 +139,7 @@
 						font-weight: 500;
 						padding-right: 24px;
 						
-						background-image: url('/static/front/images/common/ico_list_btn.png');
+						background-image: url('/front/images/common/ico_list_btn.png');
 						background-position: right center;
 						background-size: 20px;
 						background-repeat: no-repeat;
@@ -116,12 +149,27 @@
 					& + .magazineBox__view__con{
 						padding: 156px 0 160px;
 					}
+					
+				}
+				&.sticky{
+					position: sticky;
+
+				}
+				&.enter,
+				&.leave{
+					
+					animation:  fadeOutIn 1s forwards;
 				}
 			}
+		}
+		&__view{
+			transition: all .5s;
 			&__con{
 				background-color: #F4F4F5;
-				padding: 100px 0 160px;
-				&__img{max-width: 800px; margin: auto;}
+				
+				transition: all 0.5s;
+				padding: 0 0 160px;
+				&__img{padding-top: 100px; max-width: 800px; margin: auto; font-size: 0;}
 				&__topBtn{
 					margin: 120px auto 0;
 					width: 56px;
@@ -149,6 +197,7 @@
 @include tablet {
 	.magazine{
 		.magazineBox{
+			
 			&__list{
 				&__item{
 					&__con{
@@ -177,6 +226,7 @@
 				}
 			}
 			&__view{
+				padding-top: 56px;
 				&__con{
 					&__img{max-width: 600px;}
 				}
@@ -189,6 +239,9 @@
 @include mobile {
 	.magazine{
 		.magazineBox{
+			&.active{
+				@include fadeInMove('up', 0.5s, 1s, 25px, linear);
+			}
 			&__list{
 				&__item{
 					a{
@@ -220,9 +273,50 @@
 					}
 				}
 			}
-
+			&__sticky{
+				
+				&__infoFix{
+				
+					.flex{
+						padding: 15px 20px; 
+					}
+					position: sticky; 
+					top: 55px;
+					left: 0;
+					right: 0;
+					margin: auto;
+					background-color: $font-color-white;
+					&__left{
+						.vol,
+						.date{font-size: 14px;}
+					}
+					&__right{
+						.listBtn{
+							font-size: 15px;
+							padding-right: 0;
+							background: none;
+						}
+					}
+					
+					&.fixed{
+						& + .magazineBox__view__con{
+							padding: 48px 0 80px;
+						}
+					}
+				}
+			}
 			&__view{
-				&__infoFix{padding: 15px 20px;
+				&__infoFix{
+				
+					.flex{
+						padding: 15px 20px; 
+					}
+					position: sticky; 
+					top: 55px;
+					left: 0;
+					right: 0;
+					margin: auto;
+					background-color: $font-color-white;
 					&__left{
 						.vol,
 						.date{font-size: 14px;}
@@ -242,7 +336,7 @@
 					}
 				}
 				&__con{padding: 0 0 80px;
-					&__img{max-width: none;}
+					&__img{max-width: none; padding-top: 0;}
 					&__topBtn{
 						width: 48px;
 						height: 48px;

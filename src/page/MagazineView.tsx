@@ -6,7 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 type isMobileProps = {
-  isMobile?: boolean;
+  isMobile: boolean;
 };
 
 type MagazineViewData = {
@@ -27,8 +27,12 @@ export default function MagazineView({ isMobile }: isMobileProps) {
   const [magazineView, setMagazineView] = useState<MagazineViewData | null>(null);
   const [magazineViewImg, setMagazineViewImg] = useState<MagazineViewImage | null>(null);
 
-  const triggerBox = useRef<HTMLDivElement>(null);
+  const flxbarBox = useRef<HTMLDivElement>(null);
+  const flxbarTitBox = useRef<HTMLDivElement>(null);
+  const titBoxSticky = useRef<HTMLDivElement>(null);
+  const titBoxStickyInfo= useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLElement | null>(null);
+  const viewnBox = useRef<HTMLDivElement>(null);
 
   const formatDate = (date: Date): string => {
 	const yy = date.getFullYear();
@@ -36,6 +40,7 @@ export default function MagazineView({ isMobile }: isMobileProps) {
 	const dd = String(date.getDate()).padStart(2, '0');
 	return `${yy}.${mm}.${dd}`;
   };
+  
 
   useEffect(() => {
 	if (!pageNum) return;
@@ -46,11 +51,13 @@ export default function MagazineView({ isMobile }: isMobileProps) {
 
 		const url = isDev
 		  ? '/api/loadAjaxData.do'
-		  : 'http://taptap.inpix.com/taptap/loadAjaxData.do';
+		  : 'http://taptap.inpix.com/front/ajax/tabtabItemList?boardTyp=taptap';
 
-		const res = await fetch(url, {
-		  method: 'POST',
-		  body: JSON.stringify({}),
+		const res = await fetch(url, isDev ? {
+			method: 'POST',
+			body: JSON.stringify({}),
+			} : {
+			method: 'GET'
 		});
 
 		const data = await res.json();
@@ -94,76 +101,121 @@ export default function MagazineView({ isMobile }: isMobileProps) {
 
   useEffect(() => {
 	headerRef.current = document.querySelector('.header');
-	if (!triggerBox.current || !headerRef.current) return;
+	if (!headerRef.current) return;
 
 	const headerHeight = headerRef.current.offsetHeight;
+	const titBoxStickyInfoHeight = titBoxStickyInfo.current?.offsetHeight;
+	
+	if (titBoxSticky.current) {
+		titBoxSticky.current.style.paddingTop = `${headerHeight}px`;
+	}
+	if (flxbarTitBox.current) {
+		flxbarTitBox.current.style.top = `${headerHeight}px`;
+	}
 
-	ScrollTrigger.create({
-	  trigger: triggerBox.current,
-	  start: `top top+=${headerHeight}`,
-	  onEnter: () => {
-		triggerBox.current?.classList.add('fixed');
-		gsap.set(triggerBox.current, {
-		  position: 'fixed',
-		  top: headerHeight,
-		  left: 0,
-		  right: 0,
-		  margin: 'auto',
-		  width: '100%',
-		  zIndex: 999,
-		  backgroundColor: '#fff',
+
+	
+	const gsap = () => {
+		ScrollTrigger.create({
+			trigger: titBoxSticky.current,
+			start: `top+=${headerHeight} top+=${headerHeight}`,
+			// markers : true,
+			onEnter: () => {
+				if(viewnBox.current && titBoxStickyInfoHeight){
+					viewnBox.current.style.marginTop = `-${titBoxStickyInfoHeight - 100}px`
+				}
+				viewnBox.current?.classList.add('on');
+				titBoxStickyInfo.current?.classList.add('on');
+				flxbarTitBox.current?.classList.add('on');
+				flxbarBox.current?.classList.add('on');
+			},
+			onLeaveBack: () => {
+				
+				if(viewnBox.current){
+					viewnBox.current.style.marginTop = "0"
+				}
+				viewnBox.current?.classList.remove('on');
+				titBoxStickyInfo.current?.classList.remove('on');
+				flxbarTitBox.current?.classList.remove('on');
+				flxbarBox.current?.classList.remove('on');
+				
+			},
 		});
-	  },
-	  onLeaveBack: () => {
-		triggerBox.current?.classList.remove('fixed');
-		gsap.set(triggerBox.current, { clearProps: 'all' });
-	  },
-	});
+	}
 
-	const handleResize = () => ScrollTrigger.refresh();
-	window.addEventListener('resize', handleResize);
-	return () => window.removeEventListener('resize', handleResize);
+	if(!isMobile){
+		gsap();	
+
+		const handleResize = () => ScrollTrigger.refresh();
+		window.addEventListener('resize', () => {
+			handleResize();
+			
+			gsap()
+		});
+		return () => window.removeEventListener('resize', handleResize);
+	
+	}
   }, [magazineView]);
 
   if (!magazineView) return null;
 
   return (
 	<div id="contents" className="magazine">
-	  <div className="magazineBox">
-		<div className="magazineBox__view">
-		  {!isMobile && (
-			<div className="magazineBox__view__info">
-			  <p className="tit">{magazineView.title}</p>
-			  {Array.isArray(magazineView.hashTags) && magazineView.hashTags.length > 0 && (
-					<ul className="hash">
-						{magazineView.hashTags.map((tag, i) => (
-						<li key={i}>#{tag}</li>
-						))}
-					</ul>
-				)}
+	  <div className={`magazineBox active ani`}>
+		
+		<div className="magazineBox__sticky" ref={titBoxSticky}>
+			{!isMobile && (
+				<div className="magazineBox__sticky__info " ref={titBoxStickyInfo}>
+					<div>
+					<p className="tit">{magazineView.title}</p>
+					{Array.isArray(magazineView.hashTags) && magazineView.hashTags.length > 0 && (
+						<ul className="hash">
+							{magazineView.hashTags.map((tag, i) => (
+							<li key={i}>#{tag}</li>
+							))}
+						</ul>
+					)}
+					</div>
 
 
+				</div>
+			)}
+			<div className="magazineBox__sticky__infoFix" ref={flxbarBox}>
+				<div className="flex">
+					<div className="magazineBox__sticky__infoFix__left">
+						<div className="vol"> Vol.{magazineView.postNum}</div>
+					{magazineViewImg && (
+						<div className="date">{formatDate(magazineViewImg.regDtm)}</div>
+					)}
+					</div>
+					<div className="magazineBox__sticky__infoFix__right">
+					<Link to="/Magazine" className="listBtn">목록보기</Link>
+					</div>
+				</div>
 			</div>
-		  )}
-		  <div className="magazineBox__view__infoFix" ref={triggerBox}>
-			<div className="magazineBox__view__infoFix__left">
-			  <div className="vol">Vol.{magazineView.postNum}</div>
-			  {magazineViewImg && (
-				<div className="date">{formatDate(magazineViewImg.regDtm)}</div>
-			  )}
-			</div>
-			<div className="magazineBox__view__infoFix__right">
-			  <Link to="/Magazine" className="listBtn">목록보기</Link>
-			</div>
-		  </div>
+			{!isMobile && (
+				<div className="magazineBox__sticky__infoFix magazineBox__sticky__infoFix--tit" ref={flxbarTitBox}>
+					<div className="flex">
+						<div className="magazineBox__sticky__infoFix__left">
+							<div className="vol"> {magazineView.title}</div>
+						</div>
+						<div className="magazineBox__sticky__infoFix__right">
+						<Link to="/Magazine" className="listBtn">목록보기</Link>
+						</div>
+					</div>
+				</div>
+			)}
+		</div>
+		<div className="magazineBox__view" ref={viewnBox}>
 		  {magazineViewImg && (
 			<div className="magazineBox__view__con">
 			  <div className="magazineBox__view__con__img">
 				<img src={magazineViewImg.imgUrl} alt="" />
+				
 			  </div>
 			  <div className="magazineBox__view__con__topBtn">
 				<button type="button" onClick={() => window.scrollTo({ top: 0 })}>
-				  <span><img src={`/static/front/images/common/ico_topBtn_wt.png`} alt="위로" /></span>
+				  <span><img src={`/front/images/common/ico_topBtn_wt.png`} alt="위로" /></span>
 				</button>
 			  </div>
 			</div>

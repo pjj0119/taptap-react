@@ -10,7 +10,7 @@ const MagazineListItem = () => {
 		pageNum: number;
 	};
 
-	// 데이터 블러오기기
+	// 데이터 블러오기
 	const [magazineList, setMagazineList] = useState<MagazineListItem[]>([]);
 	useEffect(() => {
 		const fetchListData = async () => {
@@ -20,11 +20,13 @@ const MagazineListItem = () => {
 
 				const url = isDev
 					? '/api/loadAjaxData.do'
-  					: 'http://taptap.inpix.com/taptap/loadAjaxData.do';
+  					: 'http://taptap.inpix.com/front/ajax/tabtabItemList?boardTyp=taptap';
 
-				const res = await fetch(url, {
+				const res = await fetch(url, isDev ? {
 					method: 'POST',
 					body: JSON.stringify({}),
+					} : {
+					method: 'GET'
 				});
 				const data = await res.json();
 

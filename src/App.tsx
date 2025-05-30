@@ -1,5 +1,5 @@
 // src/App.tsx
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import '@/assets/scss/style.scss';
 
@@ -13,6 +13,38 @@ import Archive from '@/page/Archive';
 import MagazineView from '@/page/MagazineView';
 import About from '@/page/About';
 import NotFound from '@/page/NotFound';
+
+
+function App() {
+  const [isMobile, setIsMobile] = useState<null | boolean>(null);
+  useLayoutEffect(() => {
+	const check = () => {
+	if (typeof window !== 'undefined') {
+	  setIsMobile(window.innerWidth < 768);
+	}
+  };
+	check();
+	window.addEventListener('resize', check);
+	return () => window.removeEventListener('resize', check);
+  }, []);
+  
+  if (isMobile === null) return null;
+
+  return (
+	<BrowserRouter>
+	  <Layout isMobile={isMobile}>
+		<Routes>
+		  <Route path="/" element={<Main isMobile={isMobile} />} />
+		  <Route path="/Magazine" element={<Magazine />} />
+		  <Route path="/Magazine/:pageNum" element={<MagazineView isMobile={isMobile}/>} />
+		  <Route path="/Archive" element={<Archive isMobile={isMobile}/>} />
+		  <Route path="/About" element={<About isMobile={isMobile}/>} />
+		  <Route path="*" element={<NotFound />} />
+		</Routes>
+	  </Layout>
+	</BrowserRouter>
+  );
+}
 
 function Layout({
   children,
@@ -39,32 +71,6 @@ function Layout({
 		<Footer isMobile={isMobile} />
 	  )}
 	</>
-  );
-}
-
-function App() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-	const check = () => setIsMobile(window.innerWidth <= 767);
-	check();
-	window.addEventListener('resize', check);
-	return () => window.removeEventListener('resize', check);
-  }, []);
-
-  return (
-	<BrowserRouter>
-	  <Layout isMobile={isMobile}>
-		<Routes>
-		  <Route path="/" element={<Main isMobile={isMobile} />} />
-		  <Route path="/Magazine" element={<Magazine />} />
-		  <Route path="/Magazine/:pageNum" element={<MagazineView />} />
-		  <Route path="/Archive" element={<Archive isMobile={isMobile}/>} />
-		  <Route path="/About" element={<About isMobile={isMobile}/>} />
-		  <Route path="*" element={<NotFound />} />
-		</Routes>
-	  </Layout>
-	</BrowserRouter>
   );
 }
 

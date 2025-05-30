@@ -80,24 +80,25 @@ const MainVisual = ({ listDatas }: MainVisualProps) => {
 
 			const txtcolor = e.dataset.txtcolor;
 
+			title?.classList.add('active');
 			const mainTrigger = ScrollTrigger.create({
 				trigger: e,
 				start: `top top+=${titleHeight + titleTop * 0.5}`,
 				end: `bottom top+=${titleHeight + titleTop * 0.5}`,
 				onEnter: () => {
-				if (title && txtcolor) title.style.color = txtcolor;
-				setConIndex(i + 1);
+					if (title && txtcolor) title.style.color = txtcolor;
+					setConIndex(i + 1);
 				},
 				onEnterBack: () => {
-				if (title && txtcolor) title.style.color = txtcolor;
-				setConIndex(i + 1);
+					if (title && txtcolor) title.style.color = txtcolor;
+					setConIndex(i + 1);
 				},
 			});
 
 			const headerTrigger = ScrollTrigger.create({
 				trigger: e,
-				start: `top top+=${headerHeight}`,
-				end: `bottom top+=${headerHeight}`,
+				start: `top top+=${headerHeight / 2}`,
+				end: `bottom top+=${headerHeight / 2}`,
 				onEnter: () => {
 					if (header && txtcolor) {
 						header.style.color = txtcolor;
@@ -161,7 +162,7 @@ const MainVisual = ({ listDatas }: MainVisualProps) => {
 
 		return () => {
 			killList.forEach(t => t.kill());
-			
+			headerHandler();
 			window.removeEventListener('resize', () => {
 				handleResize();
 				headerHandler();

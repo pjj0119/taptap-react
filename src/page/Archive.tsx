@@ -1,187 +1,66 @@
-import { Link } from 'react-router-dom';
+
+// import { useEffect, useState } from 'react';
+import ArchiveBoxLnb from '../component/archive/ArchiveBoxLnb'
+import ArchiveBoxCon from '../component/archive/ArchiveBoxCon'
+
 
 type isMobileProps = {
-	isMobile?: boolean;
+	isMobile: boolean;
 };
 
+// type ArchiveListItemType = {
+// 	volume: number;
+// 	desc: string;
+// 	imgSrc: string;
+// 	bgColor: string;
+// 	txtColor : string;
+// 	taptapSeq : number ;
+// };
+
 const Archive = ({isMobile} : isMobileProps) => {
-	console.log('isMobile', isMobile);
+	
+		// const [archiveList, setArchiveList] = useState<ArchiveListItemType[]>([]);
+
+		// //아카이브 데이터
+		// useEffect(() => {
+		// 	const fetchListData = async () => {
+		// 		try {
+		// 			const isDev = import.meta.env.DEV;
+	
+		// 			const url = isDev
+		// 				? '/archiveApi/tabtabItemList?boardTyp=archive'
+		// 				: 'http://taptap.inpix.com/front/ajax/tabtabItemList?boardTyp=archive';
+	
+		// 			const res = await fetch(url, {
+		// 				method: 'GET',
+		// 			});
+	
+		// 			const data = await res.json();
+		// 			console.log('data', data);
+					
+		// 			const list = data.ITEMLIST.map((list: any) => ({
+		// 				volume: list.postNum,
+		// 				desc: list.title,
+		// 				imgSrc: `http://taptap.inpix.com/upload/${list.attPhgsFileNm}`,
+		// 				bgColor: list.bgColor,
+		// 				txtColor: list.txtColor,
+		// 				taptapSeq : list.taptapSeq ,
+		// 			}));
+		// 			setArchiveList(list);
+		// 		} catch (err) {
+		// 			console.error('실패:', err);
+		// 		}
+		// 	};
+	
+		// 	fetchListData();
+		// }, []);
+	
 	return (
 		<div id="contents" className="archive contentPages">
-			<div className="archiveBox">
-				{!isMobile && 
-				<div className="archiveBox__lnb">
-					
-					<div className="archiveBox__lnb__tit">
-						<p>A - Z</p>
-					</div>
+			<div className="archiveBox active">
 
-					<div className="archiveBox__lnb__listBox">
-						<div className="archiveBox__lnb__list">
-							<p className="archiveBox__lnb__list__tit">A</p>
-							<ul>
-								<li className="archiveBox__lnb__list__item">
-									<ul>
-										<li>ARC’TERYX</li>
-										<li>A.P.C</li>
-										<li>AUDI</li>
-									</ul>
-								</li>
-							</ul>
-						</div>
-						<div className="archiveBox__lnb__list">
-							<p className="archiveBox__lnb__list__tit">A</p>
-							<ul>
-								<li className="archiveBox__lnb__list__item">
-									<ul>
-										<li>ARC’TERYX</li>
-										<li>A.P.C</li>
-										<li>AUDI</li>
-									</ul>
-								</li>
-							</ul>
-						</div>
-						<div className="archiveBox__lnb__list">
-							<p className="archiveBox__lnb__list__tit">A</p>
-							<ul>
-								<li className="archiveBox__lnb__list__item">
-									<ul>
-										<li>ARC’TERYX</li>
-										<li>A.P.C</li>
-										<li>AUDI</li>
-									</ul>
-								</li>
-							</ul>
-						</div>
-						<div className="archiveBox__lnb__list">
-							<p className="archiveBox__lnb__list__tit">A</p>
-							<ul>
-								<li className="archiveBox__lnb__list__item">
-									<ul>
-										<li>ARC’TERYX</li>
-									</ul>
-								</li>
-							</ul>
-						</div>
-						<div className="archiveBox__lnb__list">
-							<p className="archiveBox__lnb__list__tit">A</p>
-							<ul>
-								<li className="archiveBox__lnb__list__item">
-									<ul>
-										<li>ARC’TERYX</li>
-									</ul>
-								</li>
-							</ul>
-						</div>
-					</div>
-
-				</div>
-				}
-
-				<div className="archiveBox__con">
-
-					<div className="archiveBox__con__tit">
-						<p>A</p>
-					</div>
-					<div className="archiveBox__con__listBox">
-						<div className="archiveBox__con__list">
-							<ul>
-								<li className="archiveBox__con__list__item">
-									<div className="archiveBox__con__list__item__img">
-										<img src={`/static/front/images/archive/ikea_logo.png`} alt="" />
-									</div>
-									<div className="archiveBox__con__list__item__txt">
-										<dl>
-											<dt>IKEA</dt>
-											<dd><Link to={"https://www.ikea.com/kr/ko/"}>https://www.ikea.com/kr/ko/</Link></dd>
-										</dl>
-										<ul className="linkBox">
-											<li><Link to={''}>Vol.00</Link></li>
-										</ul>
-									</div>
-								</li>
-								<li className="archiveBox__con__list__item">
-									<div className="archiveBox__con__list__item__img">
-										<img src={`/static/front/images/archive/ikea_logo.png`} alt="" />
-									</div>
-									<div className="archiveBox__con__list__item__txt">
-										<dl>
-											<dt>IKEA</dt>
-											<dd><Link to={"https://www.ikea.com/kr/ko/"}>https://www.ikea.com/kr/ko/</Link></dd>
-										</dl>
-										<ul className="linkBox">
-											<li><Link to={''}>Vol.00</Link></li>
-										</ul>
-									</div>
-								</li>
-							</ul>
-						</div>
-						<div className="archiveBox__con__list">
-							<p className="archiveBox__con__list__tit">B</p>
-							<ul>
-								<li className="archiveBox__con__list__item">
-									<div className="archiveBox__con__list__item__img">
-										<img src={`/static/front/images/archive/ikea_logo.png`} alt="" />
-									</div>
-									<div className="archiveBox__con__list__item__txt">
-										<dl>
-											<dt>IKEA</dt>
-											<dd><Link to={"https://www.ikea.com/kr/ko/"}>https://www.ikea.com/kr/ko/</Link></dd>
-										</dl>
-										<ul className="linkBox">
-											<li><Link to={''}>Vol.00</Link></li>
-											<li><Link to={''}>Vol.00</Link></li>
-										</ul>
-									</div>
-								</li>
-							</ul>
-						</div>
-						<div className="archiveBox__con__list">
-							<p className="archiveBox__con__list__tit">C</p>
-							<ul>
-								<li className="archiveBox__con__list__item">
-									<div className="archiveBox__con__list__item__img">
-										<img src={`/static/front/images/archive/ikea_logo.png`} alt="" />
-									</div>
-									<div className="archiveBox__con__list__item__txt">
-										<dl>
-											<dt>IKEA</dt>
-											<dd><Link to={"https://www.ikea.com/kr/ko/"}>https://www.ikea.com/kr/ko/</Link></dd>
-										</dl>
-										<ul className="linkBox">
-											<li><Link to={''}>Vol.00</Link></li>
-											<li><Link to={''}>Vol.00</Link></li>
-											<li><Link to={''}>Vol.00</Link></li>
-										</ul>
-									</div>
-								</li>
-							</ul>
-						</div>
-						<div className="archiveBox__con__list">
-							<p className="archiveBox__con__list__tit">ETC</p>
-							<ul>
-								<li className="archiveBox__con__list__item">
-									<div className="archiveBox__con__list__item__img">
-										<img src={`/static/front/images/archive/ikea_logo.png`} alt="" />
-									</div>
-									<div className="archiveBox__con__list__item__txt">
-										<dl>
-											<dt>IKEA</dt>
-											<dd><Link to={"https://www.ikea.com/kr/ko/"}>https://www.ikea.com/kr/ko/</Link></dd>
-										</dl>
-										<ul className="linkBox">
-											<li><Link to={''}>Vol.00</Link></li>
-											<li><Link to={''}>Vol.00</Link></li>
-											<li><Link to={''}>Vol.00</Link></li>
-											<li><Link to={''}>Vol.00</Link></li>
-										</ul>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</div>
-
-				</div>
+				{!isMobile && <ArchiveBoxLnb />}
+				<ArchiveBoxCon />
 
 			</div>
 		</div>

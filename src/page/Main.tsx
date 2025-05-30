@@ -26,16 +26,18 @@ const Main = ({ isMobile }: isMobileProps) => {
 
 				const url = isDev
 					? '/api/loadAjaxData.do'
-  					: 'http://taptap.inpix.com/taptap/loadAjaxData.do';
+  					: 'http://taptap.inpix.com/front/ajax/tabtabItemList?boardTyp=taptap';
 
-				const res = await fetch(url, {
+				const res = await fetch(url, isDev ? {
 					method: 'POST',
 					body: JSON.stringify({}),
+					} : {
+					method: 'GET'
 				});
 
 				const data = await res.json();
 				
-				const list = data.ITEMLIST.map((list: any) => ({
+				const list = data.ITEMLIST.slice(0,3).map((list: any) => ({
 					volume: list.postNum,
 					desc: list.title,
 					imgSrc: `http://taptap.inpix.com/upload/${list.attPhgsFileNm}`,
@@ -45,10 +47,9 @@ const Main = ({ isMobile }: isMobileProps) => {
 				}));
 				setMagazineList(list);
 			} catch (err) {
-				console.error('메인 비주얼 API 호출 실패:', err);
+				console.error('실패:', err);
 			}
 		};
-		console.log(isMobile);
 
 		fetchListData();
 	}, []);

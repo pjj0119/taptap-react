@@ -35,7 +35,7 @@ body{
 			display: block;
 			width: 85px;
 			height: 35px;
-			background-image: url('/static/front/images/common/logo_block_d.svg');
+			background-image: url('/front/images/common/logo_block_d.svg');
 			 background-position: center;
 			 background-size: 100%;
 			 background-repeat: no-repeat;
@@ -43,6 +43,11 @@ body{
 		&.white{
 			a{
 				filter: invert(1);
+			}
+			& + .header__hamBtn{
+				.hamBtn{
+					&__bar{background-color: $font-color-white;}
+				}
 			}
 		}
 
@@ -78,7 +83,7 @@ body{
 
 	&.white {
 		.header__logo {
-			background-image: url('/static/front/images/common/logo_white_d.svg');
+			background-image: url('/front/images/common/logo_white_d.svg');
 			 background-position: center;
 			 background-size: 100%;
 			 background-repeat: no-repeat;
@@ -455,7 +460,7 @@ body{
 					a{
 						padding-right: 18px;
 						
-						background-image: url('/static/front/images/common/ico_arrw_right.png');
+						background-image: url('/front/images/common/ico_arrw_right.png');
 						background-position: right center;
 						background-size: 17px;
 						background-repeat: no-repeat;

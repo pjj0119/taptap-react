@@ -11,11 +11,11 @@ type MainVisualTitleProps = {
 const MainVisualTitle = forwardRef<HTMLDivElement, MainVisualTitleProps>(
 	({ currentIndex, totalSlides, isMobile , conTotalNum , conIndex }, ref) => {
 	return (
-		<div className="mainBox__visual__title" ref={ref}>
-			<p className="tit">
+		<div className="mainBox__visual__title " ref={ref}>
+			<p className="tit ani">
 				Magazine <br className="moNone" />TAPTAP
 			</p>
-			<div className="pageNum">
+			<div className="pageNum ani">
 
 				<span className="on">{isMobile ? String(currentIndex).padStart(2, '0') : String(conIndex).padStart(2, '0')}</span>
 				<span className="slash">/</span>

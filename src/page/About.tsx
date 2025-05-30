@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 gsap.registerPlugin(ScrollTrigger);
 
 type isMobileProps = {
-	isMobile?: boolean;
+	isMobile: boolean;
 };
 
 const About = ({isMobile} : isMobileProps) => {
@@ -57,8 +57,8 @@ const About = ({isMobile} : isMobileProps) => {
 
 			const headerTrigger = ScrollTrigger.create({
 				trigger: e,
-				start: `top top+=${headerHeight}`,
-				end: `bottom top+=${headerHeight}`,
+				start: `top top+=${headerHeight / 2}`,
+				end: `bottom top+=${headerHeight / 2}`,
 				markers: false,
 				onEnter: () => {
 					if (header && txtcolor) {
@@ -118,7 +118,7 @@ const About = ({isMobile} : isMobileProps) => {
 								<dl>
 									<dt>TAPTAP</dt>
 									<dd>
-										리듬을 타듯 경쾌하게 <br className="moNone"/>
+										리듬을 타듯 경쾌하게 <br/>
 										사람들이 새로운 트렌드와 콘텐츠를<br className="moNone"/>
 										두드리고 발견하기를 바랍니다.
 									</dd>
@@ -128,17 +128,17 @@ const About = ({isMobile} : isMobileProps) => {
 						{!isMobile ? 
 						<div className="imgBox">
 							<div className="left">
-								<img src="/static/front/images/about/img_about01.png" alt="" />
+								<img src="/front/images/about/img_about01.png" alt="" />
 							</div>
 							<div className="right">
-								<img src="/static/front/images/about/img_about02.png" alt="" />
+								<img src="/front/images/about/img_about02.png" alt="" />
 							</div>
 
 						</div>
 						:
 						<div className="imgBox">
-							<img src="/static/front/images/about/img_about01_mo.png" alt="" />
-							<img src="/static/front/images/about/img_about02_mo.png" alt="" />
+							<img src="/front/images/about/img_about01_mo.png" alt="" />
+							<img src="/front/images/about/img_about02_mo.png" alt="" />
 						</div>
 						}
 					</div>
@@ -165,11 +165,11 @@ const About = ({isMobile} : isMobileProps) => {
 						
 					{!isMobile ? 
 					<div className="imgBox">
-						<img src="/static/front/images/about/img_about03.png" alt="" />
+						<img src="/front/images/about/img_about03.png" alt="" />
 					</div>
 					:
 					<div className="imgBox">
-						<img src="/static/front/images/about/img_about03_mo.png" alt="" />
+						<img src="/front/images/about/img_about03_mo.png" alt="" />
 					</div>
 					}
 				</div>
@@ -177,7 +177,7 @@ const About = ({isMobile} : isMobileProps) => {
 					<div className="aboutBox__sectionInner">
 						{!isMobile &&
 						<div className="imgBox left">
-							<img src="/static/front/images/about/img_about04.png" alt="" />
+							<img src="/front/images/about/img_about04.png" alt="" />
 						</div>
 						}	
 						<div className="txtBox right">
@@ -197,13 +197,13 @@ const About = ({isMobile} : isMobileProps) => {
 							</div>
 							{isMobile &&
 							<div className="imgBox">
-								<img src="/static/front/images/about/img_about04.png" alt="" />
+								<img src="/front/images/about/img_about04.png" alt="" />
 							</div>
 							}	
 							<div className="profileBox">
 								<dl>
 									<dt>
-										<img src="/static/front/images/about/img_about05.png" alt="" />
+										<img src="/front/images/about/img_about05.png" alt="" />
 									</dt>
 									<dd>
 										<span>긍정왕 버프</span>
@@ -213,7 +213,7 @@ const About = ({isMobile} : isMobileProps) => {
 								</dl>
 								<dl>
 									<dt>
-										<img src="/static/front/images/about/img_about06.png" alt="" />
+										<img src="/front/images/about/img_about06.png" alt="" />
 									</dt>
 									<dd>
 										<span>의심왕 너프</span>

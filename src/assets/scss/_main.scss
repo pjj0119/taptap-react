@@ -13,6 +13,15 @@
 			left: 13%;
 			z-index: 1;
 			transition: all .15s linear;
+			&.active{
+				
+				.tit{
+					@include fadeInMove('right', 0.3s, 0.3s, 30px, linear);
+				}
+				.pageNum{
+					@include fadeInMove('right', 0.5s, 0.3s, 30px, linear);
+				}
+			}
 
 			.tit {
 				font-size: 64px;
@@ -52,6 +61,21 @@
 				align-items: center;
 				justify-content: center;
 			}
+			&.active{
+				.mainBox__visual__con__img{
+					 @include fadeIn(0.3s, 0s, linear);
+				}
+			}
+			&.active{
+				.mainBox__visual__con__desc{
+					.volumeNum{
+						@include fadeInMove('left', 0.3s, 0.5s, 30px, linear);
+					}
+					.desc{
+						@include fadeInMove('left', 0.5s, 0.5s, 30px, linear);
+					}
+				}
+			}
 
 			&__img {
 				overflow: hidden;
@@ -81,6 +105,7 @@
 				right: 7%;
 				text-align: left;
 				transition: all .15s linear;
+
 
 				.volumeNum {
 					font-size: 24px;
