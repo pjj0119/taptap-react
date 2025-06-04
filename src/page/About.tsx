@@ -71,8 +71,17 @@ const About = ({isMobile} : isMobileProps) => {
 				const itemRefsTrigger = ScrollTrigger.create({
 					trigger: e,
 					start: !isMobile ? `top 50%` : `-20% 50%`,
+					// markers: true,
 					onEnter: () => e.classList.add('active'),
-					onEnterBack: () => e.classList.add('active'),
+					onEnterBack: () => {
+						e.classList.add('active');
+						if (window.scrollY === 0 && e !== itemRefs.current[0]) {
+							setTimeout(() => {
+								e.classList.remove('active');
+								console
+							},0);
+						}
+					},
 					onLeave: () => e.classList.remove('active'),
 					onLeaveBack: () => e.classList.remove('active'),
 				});

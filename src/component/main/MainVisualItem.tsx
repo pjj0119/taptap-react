@@ -8,17 +8,19 @@ type MainVisualItemType = {
 	bgColor: string;
 	txtColor: string;
 	taptapSeq : number;
+	isFirst? : boolean
 };
 
 
 const MainVisualItem = forwardRef<HTMLDivElement, MainVisualItemType>(
-	({ imgSrc, volume, desc, bgColor, txtColor , taptapSeq }, ref) => {
+	({ imgSrc, volume, desc, bgColor, txtColor , taptapSeq, isFirst }, ref) => {
 	return (
 		<div
-			className="mainBox__visual__con"
+			className={`mainBox__visual__con ${isFirst ? 'isFirst' : ''}`}
 			style={{ backgroundColor: bgColor }}
 			data-txtcolor={txtColor}
 			ref={ref}
+
 		>
 			<div className="mainBox__visual__conSticky">
 				<div className="mainBox__visual__con__img ani">

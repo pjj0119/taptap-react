@@ -1,11 +1,10 @@
 // src/App.tsx
-import { useLayoutEffect, useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { useLayoutEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import '@/assets/scss/style.scss';
 
-import Header from '@/layout/Header';
-import Footer from '@/layout/Footer';
-import FooterBar from '@/layout/FooterBar';
+
+import Layout from '@/layout/Layout';
 
 import Main from '@/page/Main';
 import Magazine from '@/page/Magazine';
@@ -18,6 +17,7 @@ import ScrollToTop from '@/RouterReset';
 
 function App() {
   const [isMobile, setIsMobile] = useState<null | boolean>(null);
+	const [isClicked, setIsClicked] = useState(false);
   useLayoutEffect(() => {
 	const check = () => {
 	if (typeof window !== 'undefined') {
@@ -34,7 +34,11 @@ function App() {
   return (
 	<BrowserRouter>
 		<ScrollToTop />
-		<Layout isMobile={isMobile}>
+		<Layout 
+			isMobile={isMobile}
+			isClicked={isClicked}
+			setIsClicked={setIsClicked}
+		>
 			<Routes>
 				<Route path="/" element={<Main isMobile={isMobile} />} />
 				<Route path="/Magazine" element={<Magazine />} />
@@ -48,32 +52,5 @@ function App() {
   );
 }
 
-function Layout({
-  children,
-  isMobile,
-}: {
-  children: React.ReactNode;
-  isMobile: boolean;
-}) {
-  const location = useLocation();
-  const [pageTit, setPageTit] = useState('');
-
-  useEffect(() => {
-	const path = location.pathname.split('/')[1] || '';
-	setPageTit(path);
-  }, [location.pathname]);
-
-  return (
-	<>
-	  <Header isMobile={isMobile} />
-	  {children}
-	  {['Magazine', 'Archive'].includes(pageTit) ? (
-		<FooterBar isMobile={isMobile} />
-	  ) : (
-		<Footer isMobile={isMobile} />
-	  )}
-	</>
-  );
-}
 
 export default App;

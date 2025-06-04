@@ -39,6 +39,20 @@
 							@include fadeInMove('left', 0.5s, 1.7s, 30px, linear);
 						}
 					}
+					&.del0{
+						
+						.mainBox__visual__con__img{
+							@include fadeIn(0.5s, 0s, linear);
+						}
+						.mainBox__visual__con__desc{
+							.volumeNum{
+								@include fadeInMove('left', 0.5s, 0.2s, 30px, linear);
+							}
+							.desc{
+								@include fadeInMove('left', 0.5s, 0.4s, 30px, linear);
+							}
+						}
+					}
 				}
 			}
 
@@ -189,7 +203,9 @@
 	}
 
 }
-
+@media (max-width: 1650px) and (min-width: 1279px) {
+	.mainBox:not(:has(.swiper)) .mainBox__visual__con__img{max-width: 420px;}
+}
 /* 1025 ~ 1279 */
 @include tablet-landscape {
 	.mainBox:not(:has(.swiper)) .mainBox__visual__title {

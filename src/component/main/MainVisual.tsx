@@ -32,6 +32,7 @@ const MainVisual = ({ listDatas }: MainVisualProps) => {
 	const headerLogoRef = useRef<HTMLDivElement | null>(null);
 	const viewBtnRef = useRef<HTMLDivElement | null>(null);
 	const footerRef = useRef<HTMLDivElement | null>(null);
+	const conIsFirstrRef = useRef<HTMLDivElement | null>(null);
 	const [conIndex, setConIndex] = useState(0);
 	
   	const location = useLocation();
@@ -59,6 +60,7 @@ const MainVisual = ({ listDatas }: MainVisualProps) => {
 		const handleResize = () => ScrollTrigger.refresh();
 		
 		requestAnimationFrame(() => {
+			conIsFirstrRef.current = document.querySelector('.mainBox__visual__con.isFirst ');
 			headerRef.current = document.querySelector('.header');
 			headerLogoRef.current = document.querySelector('.header__logo');
 			footerRef.current = document.querySelector('.footer');
@@ -81,6 +83,11 @@ const MainVisual = ({ listDatas }: MainVisualProps) => {
 			const txtcolor = e.dataset.txtcolor;
 
 			title?.classList.add('active');
+			setTimeout(() => {
+				if (itemRefs.current[0]) {
+					itemRefs.current[0]!.classList.add('del0');
+				}
+			},2500);
 			const mainTrigger = ScrollTrigger.create({
 				trigger: e,
 				start: `top top+=${titleHeight + titleTop * 0.5}`,
@@ -187,6 +194,7 @@ const MainVisual = ({ listDatas }: MainVisualProps) => {
 					txtColor ={item.txtColor}
 					ref={(e) => {itemRefs.current[i] = e}}
 					taptapSeq = {item.taptapSeq}
+					isFirst={i === 0}
 				/>
 			))}
 
