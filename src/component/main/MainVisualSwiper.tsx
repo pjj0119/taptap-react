@@ -1,10 +1,10 @@
 
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import MainVisualItem from './MainVisualItem';
 import MainVisualTitle from './MainVisualTitle';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
+// import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 
 type MainVisualItemType = {
@@ -21,9 +21,21 @@ type MainVisualProps = {
 	listDatas: MainVisualItemType[];
 };
 
-const MainVisualSwiper = ({ isMobile, listDatas }: MainVisualProps) => {
-	const [currentIndex, setCurrentIndex] = useState(1);
 
+const MainVisualSwiper = ({ isMobile, listDatas }: MainVisualProps) => {
+	const swiperRef = useRef<any>(null);
+	const [currentIndex, setCurrentIndex] = useState(1);
+	const updateHeaderClass = (swiper: any) => {
+		const header = document.querySelector('.header__logo');
+		if (!header) return;
+		
+
+		const activeSlide = swiper.slides[swiper.activeIndex];
+		const hasWhiteText = activeSlide?.querySelector('[data-txtcolor="White"]');
+		
+		header.classList.toggle('white', !!hasWhiteText);
+
+	};
 	return (
 		<div className="mainBox__visual">
 
@@ -32,13 +44,17 @@ const MainVisualSwiper = ({ isMobile, listDatas }: MainVisualProps) => {
 
 
 			<Swiper
-				modules={[Autoplay]}
+				// modules={[Autoplay]}
 				slidesPerView={1}
 				loop={true}
 				autoplay={{ delay: 3000 }}
-
+				onSwiper={(swiper) => {
+					swiperRef.current = swiper;
+					updateHeaderClass(swiper); // 초기화 시에도 반영
+				}}
 				onSlideChange={(swiper) => {
 					setCurrentIndex(swiper.realIndex + 1);// 현재 페이지
+    				updateHeaderClass(swiper);
 				}}
 			>
 				{listDatas?.map((item, i) => (

@@ -1,6 +1,15 @@
 import ArchiveBoxConList from './ArchiveBoxConList'
+type ArchiveListItemType = {
+  imgSrc: string;
+  brandTitle: string;
+  linkUrl: string;
+};
 
-const ArchiveBoxCon = () => {
+type ArchiveBoxConProps = {
+  archiveList: ArchiveListItemType[];
+};
+
+const ArchiveBoxCon = ({archiveList} : ArchiveBoxConProps) => {
 	return (
 		
 		<div className="archiveBox__con">
@@ -9,7 +18,7 @@ const ArchiveBoxCon = () => {
 				<p>A</p>
 			</div>
 			<div className="archiveBox__con__listBox">
-				<ArchiveBoxConList />
+				<ArchiveBoxConList archiveList={archiveList}/>
 			</div>
 
 		</div>

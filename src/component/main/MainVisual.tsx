@@ -57,7 +57,7 @@ const MainVisual = ({ listDatas }: MainVisualProps) => {
 	useEffect(() => {
 		const killList: ScrollTrigger[] = [];
 		const handleResize = () => ScrollTrigger.refresh();
-
+		
 		requestAnimationFrame(() => {
 			headerRef.current = document.querySelector('.header');
 			headerLogoRef.current = document.querySelector('.header__logo');
@@ -97,8 +97,8 @@ const MainVisual = ({ listDatas }: MainVisualProps) => {
 
 			const headerTrigger = ScrollTrigger.create({
 				trigger: e,
-				start: `top top+=${headerHeight / 2}`,
-				end: `bottom top+=${headerHeight / 2}`,
+				start: `top top+=${headerHeight}`,
+				// markers: true,
 				onEnter: () => {
 					if (header && txtcolor) {
 						header.style.color = txtcolor;
@@ -151,6 +151,7 @@ const MainVisual = ({ listDatas }: MainVisualProps) => {
 			});
 
 			killList.push(mainTrigger, headerTrigger, viewBtnTrigger, unfixBtnTrigger);
+			
 			});
 
 			window.addEventListener('resize', () => {
@@ -170,7 +171,6 @@ const MainVisual = ({ listDatas }: MainVisualProps) => {
 
 		};
 	}, [listDatas?.length, location.pathname]);
-
 
 
 	return (

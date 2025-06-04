@@ -1,6 +1,10 @@
 @use './import' as *;
 
 .aboutBox{
+	overflow: hidden;
+	&.active{
+		@include fadeIn( 0.5s, 1s, linear);
+	}
 	.aboutBox__sectionInner{
 		max-width: 1776px;
 		margin: auto;
@@ -20,19 +24,49 @@
 			align-items: stretch;
 			gap: 16px;
 			.left{
+				position: relative;
 				p{
 					font-size: 20px;
 					font-weight: 500;
 					color: #8A8A8A;
 					padding-left: 168px;
 					box-sizing: border-box;
+					position: absolute;
+					top: 0;
+					left: calc(100% - 153px);
+					width: max-content;
+					transition: all .75s;
+				}
+				p.on{
+					left: 0;
 				}
 			}
 			.right{
 				dl{
+					transition: all .75s linear;
+					padding-top: 80px;
+					
+					&.on{padding-top: 0;
+						dt{
+							span{
+								&.before{opacity: 0;}
+								&.after{opacity: 1;}
+							}
+						}
+					}
 					dt{
 						font-size: 40px;
 						font-weight: 600;
+						position: relative;
+						span{
+							&.after{
+								position: absolute;
+								top: 0;
+								left: 0;
+								opacity: 0;
+								transition: all .75s linear;
+							}
+						}
 					}
 					dd{
 						margin-top: 20px;
@@ -56,6 +90,14 @@
 		background: linear-gradient(to bottom, #15110F, #1B1513);
 		padding-top: 200px;
 		box-sizing: border-box;
+		&.active{
+			.txtBox{
+				dl{
+					dt{@include fadeInMove('up', 0.5s, 0s, 50px, linear);}
+					dd{@include fadeInMove('up', 0.5s, .3s, 50px, linear);}
+				}
+			}
+		}
 		.txtBox{
 			    display: flex;
 				justify-content: center;
@@ -81,6 +123,26 @@
 	}
 	.aboutBox__section--3{
 		background-color: #F4F4F5;
+		
+		&.active{
+			.right{
+				.speechBubbleBox{
+					.speechBubble{
+						&.black{
+							p{
+								@include fadeInMove('right', 0.5s, 0s, 50px, linear);
+							}
+						}
+						&.white{
+							p{
+								@include fadeInMove('left', 0.5s, 0s, 50px, linear);
+							}
+						}
+					}
+
+				}
+			}
+		}
 		.aboutBox__sectionInner{
 			display: flex;
 			align-items: flex-end;
@@ -113,6 +175,8 @@
 							background-color: $font-color-default;
 							padding: 48px 0;
 							border-radius:74px;
+							position: relative;
+							z-index: 1;
 							&::after{
 								bottom: -28px;
 								left: 100px;
@@ -172,6 +236,21 @@
 	}
 	.aboutBox__section--4{
 		border-bottom: 1px solid $font-color-default;
+		
+		&.active{
+			.textBox{
+				.tit{
+					@include fadeInMove('up', 0.5s, 0s, 50px, linear);
+					}
+				.desc{
+					@include fadeInMove('up', 0.5s, .1s, 50px, linear);
+				}
+				a{
+					@include fadeInMove('up', 0.5s, .2s, 50px, linear);
+				
+				}
+			}
+		}
 		.aboutBox__sectionInner{
 			display: flex;
 			align-items: center;
@@ -311,6 +390,10 @@
 		padding: 60px 20px 40px;
 	}
 	.aboutBox {
+		
+		&.active{
+			@include fadeInMove('up', 0.5s, 1s, 25px, linear);
+		}
 		.aboutBox__sectionInner{
 			max-width: none;
 			padding: 0 20px;
@@ -323,14 +406,22 @@
 				gap: 80px;
 				.left{
 					p{
+						position: static;
 						font-size: 16px;
 						padding-left: 0;
 					}
 				}
 				.right{
 					dl{
+						padding-top: 0;
 						dt{
 							font-size: 24px;
+							span{
+								&.after{
+									position: static;
+									opacity: 1;
+								}
+							}
 						}
 						dd{
 							margin-top: 8px;
@@ -352,6 +443,15 @@
 		.aboutBox__section--2{
 			padding-top: 120px;
 			padding-bottom: 80px;
+			
+			&.active{
+				.txtBox{
+					dl{
+						dt{@include fadeInMove('up', 0.5s, 0s, 25px, linear);}
+						dd{@include fadeInMove('up', 0.5s, .3s, 25px, linear);}
+					}
+				}
+			}
 			.txtBox {
 				dl{
 					dt{
@@ -371,6 +471,26 @@
 			}
 		}
 		.aboutBox__section--3{
+			
+			&.active{
+				.right{
+					.speechBubbleBox{
+						.speechBubble{
+							&.black{
+								p{
+									@include fadeInMove('right', 0.5s, 0s, 50px, linear);
+								}
+							}
+							&.white{
+								p{
+									@include fadeInMove('left', 0.5s, 0s, 50px, linear);
+								}
+							}
+						}
+
+					}
+				}
+			}
 			.aboutBox__sectionInner{
 				padding: 120px 24px;
 				.right {
@@ -434,6 +554,21 @@
 			}
 		}
 		.aboutBox__section--4{
+			
+			&.active{
+				.textBox{
+					.tit{
+						@include fadeInMove('up', 0.5s, .0s, 25px, linear);
+						}
+					.desc{
+						@include fadeInMove('up', 0.5s, .1s, 25px, linear);
+					}
+					a{
+						@include fadeInMove('up', 0.5s, .2s, 25px, linear);
+					
+					}
+				}
+			}
 			.aboutBox__sectionInner{
 				min-height: 510px;
 			}

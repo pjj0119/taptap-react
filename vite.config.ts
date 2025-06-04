@@ -29,6 +29,8 @@ export default defineConfig({
     },
   },
   server: {
+    host: '210.16.216.219',
+    port: 5173, // 원하는 포트
     proxy: {
       '/api': {
         target: 'http://taptap.inpix.com',

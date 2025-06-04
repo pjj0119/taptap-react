@@ -56,7 +56,7 @@ const Main = ({ isMobile }: isMobileProps) => {
 
 	return (
 		<div id="contents" className="main">
-			<div className="mainBox">
+			<div className="mainBox ani">
 				{!isMobile && <MainVisual listDatas={magazineList} />}
 				{isMobile && <MainVisualSwiper isMobile={isMobile} listDatas={magazineList} />}
 			</div>

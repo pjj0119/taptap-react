@@ -1,22 +1,35 @@
 import { Link } from 'react-router-dom';
 
-const ArchiveBoxConListItem = () => {
+type ArchiveListItemType = {
+  imgSrc: string;
+  brandTitle: string;
+  linkUrl: string;
+};
+
+type ArchiveBoxConListProps = {
+  archiveList: ArchiveListItemType[];
+};
+const ArchiveBoxConListItem = ({archiveList} : ArchiveBoxConListProps) => {
 	return (
-		
-		<li className="archiveBox__con__list__item">
-			<div className="archiveBox__con__list__item__img">
-				<img src={`/front/images/archive/ikea_logo.png`} alt="" />
-			</div>
-			<div className="archiveBox__con__list__item__txt">
-				<dl>
-					<dt>IKEA</dt>
-					<dd><a href={"https://www.ikea.com/kr/ko/"}>https://www.ikea.com/kr/ko/</a></dd>
-				</dl>
-				<ul className="linkBox">
-					<li><Link to={''}>Vol.00</Link></li>
-				</ul>
-			</div>
-		</li>
+		<>
+		{archiveList.map((item, i) => (
+
+			<li key={i} className="archiveBox__con__list__item">
+				<div className="archiveBox__con__list__item__img">
+					<img src={item.imgSrc} alt="" />
+				</div>
+				<div className="archiveBox__con__list__item__txt">
+					<dl>
+						<dt>{item.brandTitle}</dt>
+						<dd><a href={item.linkUrl}>{item.linkUrl}</a></dd>
+					</dl>
+					<ul className="linkBox">
+						<li><Link to={''}>Vol.00</Link></li>
+					</ul>
+				</div>
+			</li>
+		))}
+		</>
 	)
   }
   

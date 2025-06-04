@@ -19,6 +19,7 @@ body{
 	// transition: all .15s linear;
 
 	&.bgwt{background-color: $font-color-white;}
+
 	&Inner {
 		display: flex;
 		align-items: center;
@@ -310,6 +311,12 @@ body{
 		}
 	}
 	.header {
+		&:has(.swiper-slide-active [data-txtcolor="White"]){
+			color: #fff;
+			.header__logo.white a{
+				filter: invert(1);
+			}
+		}
 		&Inner {
 			padding: 10px 20px;
 		}
@@ -321,7 +328,7 @@ body{
 			right: 0;
 			margin: auto;
 			width: 100%;
-			height: 100dvh;
+			height: calc(100dvh - 56px);
 			background-color: $font-color-white;
 			padding: 0 20px;
 			box-sizing: border-box;
@@ -374,6 +381,9 @@ body{
 							display: block;
 							font-size: 32px;
 							font-weight: 500;
+							&.on{
+								color: $font-color-default;
+							}
 						}
 					}
 				}
@@ -451,6 +461,7 @@ body{
 			}
 		}
 		&bar{
+			z-index: 9999;
 			&Inner{
 				max-width: none;
 				padding: 19px 0;

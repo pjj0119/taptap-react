@@ -1,4 +1,4 @@
-import { useEffect , useRef  } from 'react';
+import { useEffect , useRef, useState  } from 'react';
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLocation } from 'react-router-dom';
@@ -14,109 +14,108 @@ type isMobileProps = {
 const About = ({isMobile} : isMobileProps) => {
 	
 	const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
-	const headerRef = useRef<HTMLDivElement | null>(null);
-	const headerLogoRef = useRef<HTMLDivElement | null>(null);
+	const headerRef = useRef<HTMLElement | null>(null);
+	const headerLogoRef = useRef<HTMLElement | null>(null);
 	const killListRef = useRef<ScrollTrigger[]>([]);
 	const location = useLocation();
 
-	const headerHandler = () => {
-		killListRef.current.forEach(t => t.kill()); 
-		killListRef.current = [];
-		const header = document.querySelector('.header') as HTMLElement | null;
-		const headerLogo = document.querySelector('.header__logo') as HTMLElement | null;
+	const [active, setActive] = useState(false);
 
-		if (header) {
-			gsap.set(header, { clearProps: 'all' });
-		}
-		if (headerLogo) {
-			headerLogo.classList.remove('white');
-		}
-	}
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setActive(true);
+		}, 1750);
+
+		return () => clearTimeout(timer);
+	}, []);
 
 	useEffect(() => {
 		killListRef.current.forEach(t => t.kill());
 		killListRef.current = [];
-		const handleResize = () => ScrollTrigger.refresh();
 
 		requestAnimationFrame(() => {
 			itemRefs.current = Array.from(document.querySelectorAll('.aboutBox__section')) as HTMLDivElement[];;
-			headerRef.current = document.querySelector('.header');
+			headerRef.current = document.querySelector('.header') as HTMLElement;
 			headerLogoRef.current = document.querySelector('.header__logo');
 
 			const header = headerRef.current;
 			const headerLogo = headerLogoRef.current;
 
 			const headerHeight = header?.offsetHeight || 0;
+			// const windowHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
 
 			itemRefs.current.forEach((e) => {
-				console.log(e);
-			if (!e) return;
+				if (!e) return;
+				const txtcolor = e.dataset.txtcolor;
 
-			const txtcolor = e.dataset.txtcolor;
+				const headerTrigger = ScrollTrigger.create({
+					trigger: e,
+					start: !isMobile ? `top top+=${headerHeight * 2}` : `top top+=${headerHeight}`,
+					end: !isMobile ? `bottom top+=${headerHeight * 2}` : `bottom top+=${headerHeight}`,
+					// markers: true,
+					onEnter: () => {
+						if (header && txtcolor) {
+							header.style.color = txtcolor;
+							headerLogo?.classList.toggle('white', txtcolor.toLowerCase() === 'white');
+						}
+					},
+					onEnterBack: () => {
+						if (header && txtcolor) {
+							header.style.color = txtcolor;
+							headerLogo?.classList.toggle('white', txtcolor.toLowerCase() === 'white');
+							e.classList.add('active');
+						}
+					},
+				});
 
+				const itemRefsTrigger = ScrollTrigger.create({
+					trigger: e,
+					start: !isMobile ? `top 50%` : `-20% 50%`,
+					onEnter: () => e.classList.add('active'),
+					onEnterBack: () => e.classList.add('active'),
+					onLeave: () => e.classList.remove('active'),
+					onLeaveBack: () => e.classList.remove('active'),
+				});
 
-			const headerTrigger = ScrollTrigger.create({
-				trigger: e,
-				start: `top top+=${headerHeight / 2}`,
-				end: `bottom top+=${headerHeight / 2}`,
-				markers: false,
-				onEnter: () => {
-					if (header && txtcolor) {
-						header.style.color = txtcolor;
-						headerLogo?.classList.toggle('white', txtcolor.toLowerCase() === 'white');
-						e.classList.add('active');
-					}
-				},
-				onEnterBack: () => {
-					if (header && txtcolor) {
-						header.style.color = txtcolor;
-						headerLogo?.classList.toggle('white', txtcolor.toLowerCase() === 'white');
-						e.classList.add('active');
-					}
-				},
-				onLeave: () => {
-					e.classList.remove('active');
-				},
-
-				onLeaveBack: () => {
-					e.classList.remove('active');
-				},
-			});
-
-			killListRef.current.push(headerTrigger);
+				killListRef.current.push(headerTrigger, itemRefsTrigger);
 			});
 
 			
-			window.addEventListener('resize', () => {
-				handleResize();
-				headerHandler();
-			});
 			ScrollTrigger.refresh();
 		});
 
-		return () => {
-			
-			window.removeEventListener('resize', () => {
-				handleResize();
-				headerHandler();
-			});
-			
+		const handleResize = () => ScrollTrigger.refresh();
+		window.addEventListener('resize', handleResize);
 
+		return () => {
+			window.removeEventListener('resize', handleResize);
+			killListRef.current.forEach(t => t.kill());
+			killListRef.current = [];
 		};
-	}, [ location.pathname]);
+	}, [location.pathname, isMobile]);
 
 	return (
 		<div id="contents" className="about contentPages">
-			<div className="aboutBox">
+			<div className="aboutBox active">
 				<div className="aboutBox__section aboutBox__section--1" data-txtcolor="Black" data-bgcolor="white">
 					<div className="aboutBox__sectionInner">
 						<div className="txtBox">
 							<div className="left">
-								<p>인픽스의 트렌드 매거진 탭탭</p>
+								<p className={active && !isMobile ? 'on' : ''}>인픽스의 트렌드 매거진 탭탭</p>
 							</div>
 							<div className="right">
-								<dl>
-									<dt>TAPTAP</dt>
+								<dl className={active && !isMobile ? 'on' : ''}> 
+									<dt>
+										{!isMobile ? 
+										<>
+											<span className='before'>탭탭</span>
+											<span className='after'>TAPTAP</span>
+										</>
+										:
+										<span className='after'>TAPTAP</span>
+										
+										}
+									</dt>
 									<dd>
 										리듬을 타듯 경쾌하게 <br/>
 										사람들이 새로운 트렌드와 콘텐츠를<br className="moNone"/>
@@ -150,11 +149,11 @@ const About = ({isMobile} : isMobileProps) => {
 							{!isMobile && <div className="left"></div>}
 							<div className="right">
 								<dl>
-									<dt>
+									<dt className='ani'>
 										트렌드가 궁금해 <br/>
 										두드리게 되는 탭탭
 									</dt>
-									<dd>
+									<dd className='ani'>
 										유용한 정보를 전달하기 위해 다양한 데이터를 분석하고, <br className="moNone"/>
 										필요한 콘텐츠가 조화롭게 균형을 이루도록 깊이 고민했습니다.
 									</dd>
@@ -183,12 +182,12 @@ const About = ({isMobile} : isMobileProps) => {
 						<div className="txtBox right">
 							<div className="speechBubbleBox">
 								<div className="speechBubble black">
-									<p>
+									<p className='ani'>
 										버프와 너프가 전하는 재밌는 이야기
 									</p>
 								</div>
 								<div className="speechBubble white">
-									<p>
+									<p className='ani'>
 										대화형 콘텐츠로<br/>
 										재미와 신선함을 전달드립니다
 									</p>
@@ -230,9 +229,9 @@ const About = ({isMobile} : isMobileProps) => {
 				<div className="aboutBox__section aboutBox__section--4" data-txtcolor="black" data-bgcolor="White">
 					<div className="aboutBox__sectionInner">
 						<div className="textBox">
-							<p className="tit">인픽스의 진심이 만들어낸 <br className='moBlock'/>매거진 탭탭</p>
-							<p className="desc">누구나 웹사이트 등 인픽스 채널을 통해 <br className='moBlock'/>구독이 가능합니다.</p>
-							<Link to="https://www.inpix.com/newsletter/add">구독하러 가기</Link>
+							<p className="tit ani">인픽스의 진심이 만들어낸 <br className='moBlock'/>매거진 탭탭</p>
+							<p className="desc ani">누구나 웹사이트 등 인픽스 채널을 통해 <br className='moBlock'/>구독이 가능합니다.</p>
+							<Link to="https://www.inpix.com/newsletter/add" className='ani'>구독하러 가기</Link>
 						</div>
 					</div>
 				</div>

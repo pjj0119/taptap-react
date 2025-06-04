@@ -30,11 +30,13 @@ const MainVisualItem = forwardRef<HTMLDivElement, MainVisualItemType>(
 					className="mainBox__visual__con__desc " 
 					style={{ color: txtColor }}
 				>
-					<p className="volumeNum ani">Vol.{volume}</p>
-					<p
-						className="desc ani"
-						dangerouslySetInnerHTML={{ __html: desc }}
-					/>
+					<Link to={`/Magazine/${taptapSeq}`}>
+						<p className="volumeNum ani">Vol.{volume}</p>
+						<p
+							className="desc ani"
+							dangerouslySetInnerHTML={{ __html: desc }}
+						/>
+					</Link>
 				</div>
 			</div>
 		</div>

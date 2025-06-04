@@ -1,15 +1,16 @@
 import { forwardRef } from "react";
 
 type MainVisualTitleProps = {
-	currentIndex?: number;//현재페이지
-	totalSlides?: number;//전체페이지
+	currentIndex?: number;
+	totalSlides?: number;
 	isMobile?: boolean;
-	conTotalNum? : number;
-	conIndex? : number
+	conTotalNum?: number;
+	conIndex?: number;
 };
 
 const MainVisualTitle = forwardRef<HTMLDivElement, MainVisualTitleProps>(
 	({ currentIndex, totalSlides, isMobile , conTotalNum , conIndex }, ref) => {
+		// console.log(currentIndex)
 	return (
 		<div className="mainBox__visual__title " ref={ref}>
 			<p className="tit ani">
@@ -17,7 +18,7 @@ const MainVisualTitle = forwardRef<HTMLDivElement, MainVisualTitleProps>(
 			</p>
 			<div className="pageNum ani">
 
-				<span className="on">{isMobile ? String(currentIndex).padStart(2, '0') : String(conIndex).padStart(2, '0')}</span>
+				<span className="on">{isMobile || String(currentIndex) == 'NaN' ? String(currentIndex).padStart(2, '0') : String(conIndex).padStart(2, '0')}</span>
 				<span className="slash">/</span>
 				<span>{isMobile ? String(totalSlides).padStart(2, '0') : String(conTotalNum).padStart(2, '0')}</span>
 			</div>

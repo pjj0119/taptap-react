@@ -1,6 +1,9 @@
 @use './import' as *;
 
 .mainBox {
+	
+	min-height: 100dvh;
+	@include fadeIn(0.5s, 1s, linear);
 	&:not(:has(.swiper)) {
 		.mainBox__visual{
 			&:has(.noFixed){
@@ -16,10 +19,26 @@
 			&.active{
 				
 				.tit{
-					@include fadeInMove('right', 0.3s, 0.3s, 30px, linear);
+					@include fadeInMove('right', 0.5s, 1.3s, 30px, linear);
 				}
 				.pageNum{
-					@include fadeInMove('right', 0.5s, 0.3s, 30px, linear);
+					@include fadeInMove('right', 0.5s, 1.5s, 30px, linear);
+				}
+			}
+			& + .mainBox__visual__con{
+				
+				&.active{
+					.mainBox__visual__con__img{
+						@include fadeIn(0.5s, 1s, linear);
+					}
+					.mainBox__visual__con__desc{
+						.volumeNum{
+							@include fadeInMove('left', 0.5s, 1.5s, 30px, linear);
+						}
+						.desc{
+							@include fadeInMove('left', 0.5s, 1.7s, 30px, linear);
+						}
+					}
 				}
 			}
 
@@ -50,7 +69,7 @@
 		.mainBox__visual__con {
 			position: sticky;
 			top: 0;
-			height: 250dvh;
+			height: 170dvh;
 
 			&Sticky {
 				position: sticky;
@@ -63,16 +82,14 @@
 			}
 			&.active{
 				.mainBox__visual__con__img{
-					 @include fadeIn(0.3s, 0s, linear);
+					 @include fadeIn(0.5s, 0s, linear);
 				}
-			}
-			&.active{
 				.mainBox__visual__con__desc{
 					.volumeNum{
-						@include fadeInMove('left', 0.3s, 0.5s, 30px, linear);
+						@include fadeInMove('left', 0.5s, 0.2s, 30px, linear);
 					}
 					.desc{
-						@include fadeInMove('left', 0.5s, 0.5s, 30px, linear);
+						@include fadeInMove('left', 0.5s, 0.4s, 30px, linear);
 					}
 				}
 			}
@@ -258,6 +275,7 @@
 					color: $font-color-white;
 					font-size: 16px;
 					font-weight: 500;
+					&.ani{opacity: 1;}
 				}
 
 				.pageNum {
@@ -267,6 +285,7 @@
 					display: flex;
 					align-items: center;
 					gap: 6px;
+					&.ani{opacity: 1;}
 
 					span {
 						&:not(.on) {
@@ -290,6 +309,7 @@
 					justify-content: center;
 					align-items: center;
 					overflow: hidden;
+					&.ani{opacity: 1;}
 
 					a {
 						width: 100%;
@@ -316,11 +336,15 @@
 					.volumeNum {
 						font-size: 14px;
 						font-weight: 600;
+						
+						&.ani{opacity: 1;}
 					}
 
 					.desc {
 						font-weight: 600;
 						font-size: 28px;
+						
+						&.ani{opacity: 1;}
 					}
 				}
 			}
