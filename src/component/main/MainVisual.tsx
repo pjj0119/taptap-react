@@ -37,18 +37,10 @@ const MainVisual = ({ listDatas }: MainVisualProps) => {
 	
   	const location = useLocation();
 	
-	const headerHandler = () => {
+	const viewBtnHandler = () => {
 
-		const header = document.querySelector('.header') as HTMLElement | null;
-		const headerLogo = document.querySelector('.header__logo') as HTMLElement | null;
 		const viewBtn = document.querySelector('.mainViewAllBtn') as HTMLElement | null;
 
-		if (header) {
-			gsap.set(header, { clearProps: 'all' });
-		}
-		if (headerLogo) {
-			headerLogo.classList.remove('white');
-		}
 		if (viewBtn) {
 			gsap.set(viewBtn, { clearProps: 'all' });
 			viewBtn.classList.remove('noFixed');
@@ -163,17 +155,17 @@ const MainVisual = ({ listDatas }: MainVisualProps) => {
 
 			window.addEventListener('resize', () => {
 				handleResize();
-				headerHandler();
+				viewBtnHandler();
 			});
 			ScrollTrigger.refresh();
 		});
 
 		return () => {
 			killList.forEach(t => t.kill());
-			headerHandler();
+			viewBtnHandler();
 			window.removeEventListener('resize', () => {
 				handleResize();
-				headerHandler();
+				viewBtnHandler();
 			});
 
 		};

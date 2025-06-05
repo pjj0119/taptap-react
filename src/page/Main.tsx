@@ -25,14 +25,12 @@ const Main = ({ isMobile }: isMobileProps) => {
 				const isDev = import.meta.env.DEV;
 
 				const url = isDev
-					? '/api/loadAjaxData.do'
+					? '/magazineApi/tabtabItemList?boardTyp=taptap'
   					: 'http://taptap.inpix.com/front/ajax/tabtabItemList?boardTyp=taptap';
 
-				const res = await fetch(url, isDev ? {
-					method: 'POST',
-					body: JSON.stringify({}),
-					} : {
-					method: 'GET'
+				
+				const res = await fetch(url, {
+					method: 'GET',
 				});
 
 				const data = await res.json();
@@ -40,7 +38,7 @@ const Main = ({ isMobile }: isMobileProps) => {
 				const list = data.ITEMLIST.slice(0,3).map((list: any) => ({
 					volume: list.postNum,
 					desc: list.title,
-					imgSrc: `http://taptap.inpix.com/upload/${list.attPhgsFileNm}`,
+					imgSrc: `http://taptap.inpix.com/upload/magazine/${list.attPhgsFileNm}`,
 					bgColor: list.bgColor,
 					txtColor: list.txtColor,
 					taptapSeq : list.taptapSeq ,

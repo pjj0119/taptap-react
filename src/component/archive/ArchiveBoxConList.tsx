@@ -1,22 +1,35 @@
-import ArchiveBoxConListItem from './ArchiveBoxConListItem'
+import ArchiveBoxConListItem from './ArchiveBoxConListItem';
+
 type ArchiveListItemType = {
   imgSrc: string;
   brandTitle: string;
   linkUrl: string;
+  magazineNum: string[];
 };
 
-type ArchiveBoxConListProps = {
-  archiveList: ArchiveListItemType[];
+type AlphabetGroupedType = {
+  [key: string]: ArchiveListItemType[];
 };
-const ArchiveBoxConList = ({ archiveList }: ArchiveBoxConListProps) => {
-	return (
-		
-		<div className="archiveBox__con__list">
-			<ul>
-				<ArchiveBoxConListItem archiveList={archiveList}/>
-			</ul>
+
+type AlphabetGroupedProps = {
+  alphabetGrouped: AlphabetGroupedType;
+};
+
+const ArchiveBoxConList = ({ alphabetGrouped }: AlphabetGroupedProps) => {
+  return (
+	<>
+	  {Object.entries(alphabetGrouped).map(([key, items], i) => (
+		<div key={key} className="archiveBox__con__list">
+			{i !== 0 && 
+		  		<p className="archiveBox__con__list__tit">{key}</p>
+			}
+		  <ul>
+			<ArchiveBoxConListItem items={items} />
+		  </ul>
 		</div>
-	)
-  }
-  
-  export default ArchiveBoxConList
+	  ))}
+	</>
+  );
+};
+
+export default ArchiveBoxConList;

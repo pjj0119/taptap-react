@@ -1,24 +1,34 @@
+import ArchiveBoxLnbList from './ArchiveBoxLnbList';
 
-import ArchiveBoxLnbList from './ArchiveBoxLnbList'
+type ArchiveListItemType = {
+  imgSrc: string;
+  brandTitle: string;
+  linkUrl: string;
+  magazineNum: string[];
+};
 
-const ArchiveBoxLnb = () => {
-	
-	return (
-		
-		<div className="archiveBox__lnb">
-			
-			<div className="archiveBox__lnb__tit">
-				<p>A - Z</p>
-			</div>
+type AlphabetGroupedType = {
+  [key: string]: ArchiveListItemType[];
+};
 
-			<div className="archiveBox__lnb__listBox">
+type AlphabetGroupedProps = {
+  alphabetGrouped: AlphabetGroupedType;
+};
 
-				<ArchiveBoxLnbList />
-				
-			</div>
+const ArchiveBoxLnb = ({ alphabetGrouped }: AlphabetGroupedProps) => {
+  if (!alphabetGrouped || Object.keys(alphabetGrouped).length === 0) return null;
 
+  return (
+	<div className="archiveBox__lnb">
+		<div className="archiveBox__lnb__tit">
+			<p>A - Z</p>
 		</div>
-	)
-  }
-  
-  export default ArchiveBoxLnb
+
+		<div className="archiveBox__lnb__listBox">
+			<ArchiveBoxLnbList alphabetGrouped={alphabetGrouped} />
+		</div>
+	</div>
+  );
+};
+
+export default ArchiveBoxLnb;

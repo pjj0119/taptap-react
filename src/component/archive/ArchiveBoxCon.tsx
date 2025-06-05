@@ -3,13 +3,17 @@ type ArchiveListItemType = {
   imgSrc: string;
   brandTitle: string;
   linkUrl: string;
+  magazineNum: string[];
 };
 
-type ArchiveBoxConProps = {
-  archiveList: ArchiveListItemType[];
+type AlphabetGroupedType = {
+  [key: string]: ArchiveListItemType[];
 };
 
-const ArchiveBoxCon = ({archiveList} : ArchiveBoxConProps) => {
+type AlphabetGroupedProps = {
+  alphabetGrouped: AlphabetGroupedType;
+};
+const ArchiveBoxCon = ({ alphabetGrouped }: AlphabetGroupedProps) => {
 	return (
 		
 		<div className="archiveBox__con">
@@ -18,7 +22,7 @@ const ArchiveBoxCon = ({archiveList} : ArchiveBoxConProps) => {
 				<p>A</p>
 			</div>
 			<div className="archiveBox__con__listBox">
-				<ArchiveBoxConList archiveList={archiveList}/>
+				<ArchiveBoxConList alphabetGrouped={alphabetGrouped}/>
 			</div>
 
 		</div>

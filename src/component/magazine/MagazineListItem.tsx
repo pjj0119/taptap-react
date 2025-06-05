@@ -19,21 +19,19 @@ const MagazineListItem = () => {
 				const isDev = import.meta.env.DEV;
 
 				const url = isDev
-					? '/api/loadAjaxData.do'
+					? '/magazineApi/tabtabItemList?boardTyp=taptap'
   					: 'http://taptap.inpix.com/front/ajax/tabtabItemList?boardTyp=taptap';
 
-				const res = await fetch(url, isDev ? {
-					method: 'POST',
-					body: JSON.stringify({}),
-					} : {
-					method: 'GET'
+				
+				const res = await fetch(url, {
+					method: 'GET',
 				});
 				const data = await res.json();
 
 				const list = data.ITEMLIST.map((list: any) => ({
 					postNum: list.postNum,
 					title: list.title,
-					imgUrl: `http://taptap.inpix.com/upload/${list.attPhgsFileNm}`,
+					imgUrl: `http://taptap.inpix.com/upload/magazine/${list.attPhgsFileNm}`,
 					hashTags: [...new Set(list.hashTag.split(',').map((tag: string) => tag.trim()).filter((tag: string) => tag !== ""))],
 					pageNum: list.taptapSeq,
 				}));

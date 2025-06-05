@@ -9,7 +9,7 @@ const RouterReset = () => {
       window.history.scrollRestoration = 'manual';
     }
     
-    // 사파리 대응: 살짝 움직였다가 다시 0으로
+    // Safari 대응: 살짝 움직였다가 다시 0으로
     const forceScrollTop = () => {
       window.scrollTo(0, 1);
       setTimeout(() => {

@@ -50,14 +50,11 @@ export default function MagazineView({ isMobile }: isMobileProps) {
 		const isDev = import.meta.env.DEV;
 
 		const url = isDev
-		  ? '/api/loadAjaxData.do'
+		  ? '/magazineApi/tabtabItemList?boardTyp=taptap'
 		  : 'http://taptap.inpix.com/front/ajax/tabtabItemList?boardTyp=taptap';
 
-		const res = await fetch(url, isDev ? {
-			method: 'POST',
-			body: JSON.stringify({}),
-			} : {
-			method: 'GET'
+		const res = await fetch(url, {
+			method: 'GET',
 		});
 
 		const data = await res.json();
@@ -87,7 +84,7 @@ export default function MagazineView({ isMobile }: isMobileProps) {
 		});
 
 		setMagazineViewImg({
-		  imgUrl: `http://taptap.inpix.com/upload/${viewImg.attachmentPhgsFileNm}`,
+		  imgUrl: `http://taptap.inpix.com/upload/magazine/${viewImg.attachmentPhgsFileNm}`,
 		  regDtm: new Date(viewImg.regDtm),
 		});
 	  } catch (err) {

@@ -32,10 +32,10 @@ export default defineConfig({
     host: '210.16.216.219',
     port: 5173, // 원하는 포트
     proxy: {
-      '/api': {
+      '/magazineApi': {
         target: 'http://taptap.inpix.com',
         changeOrigin: true,
-        rewrite: path => path.replace(/^\/api/, '/taptap'),
+        rewrite: path => path.replace(/^\/magazineApi/, '/front/ajax'),
       },
       '/archiveApi': {
         target: 'http://taptap.inpix.com',

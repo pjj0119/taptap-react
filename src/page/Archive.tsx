@@ -8,95 +8,70 @@ type isMobileProps = {
 	isMobile: boolean;
 };
 
-
 type ArchiveListItemType = {
 	imgSrc: string;
 	brandTitle: string;
 	linkUrl: string;
+	magazineNum: string[];
 };
-// type MagazineListListItemType = {
-// 	imgSrc: string;
-// 	brandTitle: string;
-// 	linkUrl: string;
-// };
 const Archive = ({isMobile} : isMobileProps) => {
 	
-		const [archiveList, setArchiveList] = useState<ArchiveListItemType[]>([]);
-		// const [magazineList, setMagazineList] = useState<MagazineListListItemType[]>([]);
+		const [alphabetGrouped, setAlphabetGrouped] = useState<Record<string, ArchiveListItemType[]>>({});
+
+		const alphabetList = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'etc'];
+		const isDev = import.meta.env.DEV;
+
 
 		//아카이브 데이터
 		useEffect(() => {
-			const fetchListData = async () => {
+
+			const baseUrl = isDev ? '/archiveApi' : 'http://taptap.inpix.com/front/ajax';
+
+			const fetchAllList = async () => {
 				try {
-					const isDev = import.meta.env.DEV;
-	
-					const url = isDev
-						? '/archiveApi/tabtabItemList?boardTyp=archive'
-						: 'http://taptap.inpix.com/front/ajax/tabtabItemList?boardTyp=archive';
-	
-					const res = await fetch(url, {
-						method: 'GET',
+					const requests = alphabetList.map(async (char) => {
+
+						const url = `${baseUrl}/tabtabItemList?boardTyp=archive&schTaptapTitle=${char}`;
+						const res = await fetch(url);
+						const data = await res.json();
+					// console.log(data.ITEMLIST)
+						return data.ITEMLIST.map((item: any) => ({
+							imgSrc: `http://taptap.inpix.com/upload/archive/${item.attPhgsFileNm}`,
+							brandTitle: item.brandTitle,
+							linkUrl: item.linkUrl,
+							magazineNum: [...new Set((item.magazineFkSeq ?? "").split(',').map((tag: string) => tag.trim()).filter((tag: string) => tag !== ""))],
+						}));
 					});
-	
-					const data = await res.json();
+
+					const results = await Promise.all(requests);
+					const combinedList = results.flat(); 
 					
-					const archiveList = data.ITEMLIST.map((archiveList: any) => ({
-						imgSrc: `http://taptap.inpix.com/upload/archive/${archiveList.attPhgsFileNm}`,
-						brandTitle : archiveList.brandTitle,
-						linkUrl : archiveList.linkUrl,
-					}));
-					
-					setArchiveList(archiveList);
+					const alphabetGrouped: Record<string, ArchiveListItemType[]> = {};
+					for (const item of combinedList) {
+						const firstChar = item.brandTitle?.[0] || '';
+						const upperChar = firstChar.toUpperCase();
+						const key = /^[A-Z]$/.test(upperChar) ? upperChar.toLowerCase() : 'etc';
+
+						if (!alphabetGrouped[key]) alphabetGrouped[key] = [];
+						alphabetGrouped[key].push(item);
+					}
+
+					setAlphabetGrouped(alphabetGrouped);
 				} catch (err) {
-					console.error('실패:', err);
+					console.error('아카이브 전체 로딩 실패:', err);
 				}
 			};
-	
-			fetchListData();
+
+			fetchAllList();
 		}, []);
 		
-		// 매거진 데이터
-		// useEffect(() => {
-		// 	const fetchListData = async () => {
-		// 		try {
-		// 			const isDev = import.meta.env.DEV;
-					
-		// 			const url = isDev
-		// 				? '/api/loadAjaxData.do'
-		// 				: 'http://taptap.inpix.com/front/ajax/tabtabItemList?boardTyp=taptap';
-
-					
-		// 			const res = await fetch(url, isDev ? {
-		// 				method: 'POST',
-		// 				body: JSON.stringify({}),
-		// 				} : {
-		// 				method: 'GET'
-		// 			});
-	
-		// 			const data = await res.json();
-		// 			console.log('data', data);
-					
-		// 			const magazineList = data.ITEMLIST.map((magazineList: any) => ({
-		// 				imgSrc: `http://taptap.inpix.com/upload/${magazineList.attPhgsFileNm}`,
-		// 				brandTitle : magazineList.brandTitle,
-		// 				linkUrl : magazineList.linkUrl,
-		// 			}));
-					
-		// 			setMagazineList(magazineList);
-		// 		} catch (err) {
-		// 			console.error('실패:', err);
-		// 		}
-		// 	};
-	
-		// 	fetchListData();
-		// }, []);
-	
+		
 	return (
 		<div id="contents" className="archive contentPages">
 			<div className="archiveBox active">
 
-				{!isMobile && <ArchiveBoxLnb />}
-				<ArchiveBoxCon archiveList={archiveList}/>
+				{!isMobile && <ArchiveBoxLnb alphabetGrouped={alphabetGrouped}/>}
+				<ArchiveBoxCon alphabetGrouped={alphabetGrouped}/>
 
 			</div>
 		</div>

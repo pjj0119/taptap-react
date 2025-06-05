@@ -44,6 +44,7 @@
 					color: $font-color-gray;
 					font-size: 20px;
 					font-weight: 700;
+					text-transform: uppercase;
 				}
 				&__item{
 					ul{
@@ -80,6 +81,7 @@
 					font-size: 40px;
 					font-weight: 600;
 					padding-bottom: 40px;
+					text-transform: uppercase;
 				}
 				& > ul{
 					display: flex;
