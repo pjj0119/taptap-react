@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import MainVisualItem from './MainVisualItem';
 import MainVisualTitle from './MainVisualTitle';
 import { Swiper, SwiperSlide } from 'swiper/react';
-// import { Autoplay } from 'swiper/modules';
+import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import type { MainVisualProps } from '@/types/MainTypes';
 
@@ -32,7 +32,7 @@ const MainVisualSwiper = ({ isMobile, listDatas }: MainVisualProps) => {
 
 
 			<Swiper
-				// modules={[Autoplay]}
+				modules={[Autoplay]}
 				slidesPerView={1}
 				loop={true}
 				autoplay={{ delay: 3000 }}
