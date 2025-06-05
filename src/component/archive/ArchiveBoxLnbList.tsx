@@ -1,17 +1,6 @@
 
+import type { AlphabetGroupedProps } from '@/types/ArchiveTypes';
 
-type ArchiveListItemType = {
-  imgSrc: string;
-  brandTitle: string;
-  linkUrl: string;
-  magazineNum: string[];
-};
-
-type AlphabetGroupedProps = {
-  alphabetGrouped: {
-    [key: string]: ArchiveListItemType[];
-  };
-};
 const ArchiveBoxConList = ({alphabetGrouped} : AlphabetGroupedProps) => {
 	const makeSafeId = (text: string) => text.toLowerCase().replace(/[^a-z0-9]/gi, '-');
 

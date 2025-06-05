@@ -1,9 +1,5 @@
 import { Link } from 'react-router-dom';
-
-type HeaderMoGnbProps = {
-	setIsClicked: (isClicked: boolean) => void;
-	pageTit: string;
-}
+import type { HeaderMoGnbProps } from '@/types/LayputTypes';
 
 
 const HeaderMoGnb = ({ setIsClicked , pageTit }: HeaderMoGnbProps) => {

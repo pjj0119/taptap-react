@@ -1,9 +1,6 @@
 import { Link } from 'react-router-dom';
+import type { isMobileProps } from '@/types/IsMobileTypes';
 
-
-type isMobileProps = {
-	isMobile: boolean;
-};
 const Footer = ({ isMobile }: isMobileProps) => {
 	return (
 		<footer id='footer' className="footerbar">

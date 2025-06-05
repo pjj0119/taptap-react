@@ -3,18 +3,10 @@ import { useEffect, useState } from 'react';
 
 import MainVisualSwiper from '@/component/main/MainVisualSwiper';
 import MainVisual from '@/component/main/MainVisual';
+import type { isMobileProps } from '@/types/IsMobileTypes';
+import type { MainVisualItemType } from '@/types/MainTypes';
 
-type isMobileProps = {
-	isMobile?: boolean;
-};
-type MainVisualItemType = {
-	volume: number;
-	desc: string;
-	imgSrc: string;
-	bgColor: string;
-	txtColor : string;
-	taptapSeq : number ;
-};
+
 
 const Main = ({ isMobile }: isMobileProps) => {
 
@@ -55,7 +47,7 @@ const Main = ({ isMobile }: isMobileProps) => {
 	return (
 		<div id="contents" className="main">
 			<div className="mainBox ani">
-				{!isMobile && <MainVisual listDatas={magazineList} />}
+				{!isMobile && <MainVisual listDatas={magazineList} isMobile={isMobile}/>}
 				{isMobile && <MainVisualSwiper isMobile={isMobile} listDatas={magazineList} />}
 			</div>
 		</div>

@@ -4,13 +4,7 @@ import { useLocation } from 'react-router-dom';
 import Header from '@/layout/Header';
 import Footer from '@/layout/Footer';
 import FooterBar from '@/layout/FooterBar';
-
-type LayoutProps = {
-  children: React.ReactNode;
-  isMobile: boolean;
-  isClicked: boolean;
-  setIsClicked: React.Dispatch<React.SetStateAction<boolean>>;
-};
+import type { LayoutProps } from '@/types/LayputTypes';
 
 const Layout = ({ children, isMobile, isClicked, setIsClicked }: LayoutProps) => {
   const location = useLocation();

@@ -1,17 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import type { MagazineListItemType } from '@/types/MagazineListTypes';
 
 const MagazineListItem = () => {
-	type MagazineListItem = {
-		postNum: number;
-		title: string;
-		imgUrl: string;
-		hashTags: string[];
-		pageNum: number;
-	};
-
+	
 	// 데이터 블러오기
-	const [magazineList, setMagazineList] = useState<MagazineListItem[]>([]);
+	const [magazineList, setMagazineList] = useState<MagazineListItemType[]>([]);
 	useEffect(() => {
 		const fetchListData = async () => {
 			try {

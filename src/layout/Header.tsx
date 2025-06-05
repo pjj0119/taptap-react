@@ -7,12 +7,8 @@ import HeaderLogo from '@/component/layout/HeaderLogo';
 import HeaderGnb from '@/component/layout/HeaderGnb';
 import HeaderMoGnb from '@/component/layout/HeaderMoGnb';
 import HeaderBtn from '@/component/layout/HeaderBtn';
+import type { HeaderProps } from '@/types/LayputTypes';
 
-type HeaderProps = {
-	isMobile: boolean;
-  	isClicked: boolean;
-	setIsClicked: React.Dispatch<React.SetStateAction<boolean>>;
-};
 const Header = ({ isMobile, isClicked, setIsClicked }: HeaderProps) => {
   	const location = useLocation();
 	//페이지에 따른 푸터설정

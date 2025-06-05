@@ -1,12 +1,6 @@
 import { forwardRef } from "react";
+import type { MainVisualTitleProps } from '@/types/MainTypes';
 
-type MainVisualTitleProps = {
-	currentIndex?: number;
-	totalSlides?: number;
-	isMobile?: boolean;
-	conTotalNum?: number;
-	conIndex?: number;
-};
 
 const MainVisualTitle = forwardRef<HTMLDivElement, MainVisualTitleProps>(
 	({ currentIndex, totalSlides, isMobile , conTotalNum , conIndex }, ref) => {

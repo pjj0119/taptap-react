@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLocation } from 'react-router-dom';
+import type { HeaderMoGnbProps } from '@/types/LayputTypes';
 
 
-type HeaderMoGnbProps = {
-	setIsClicked: (isClicked: boolean) => void;
-}
 const HeaderBtn = ({ setIsClicked }: HeaderMoGnbProps) => {
 	const [headerTit, setHeaderTit] = useState<string>('');
 	

@@ -9,18 +9,7 @@ import { useLocation } from 'react-router-dom';
 import MainVisualItem from './MainVisualItem';
 import MainVisualTitle from './MainVisualTitle';
 import MainViewAllBtn from './MainViewAllBtn';
-type MainVisualItemType = {
-	imgSrc: string;
-	volume: number;
-	desc: string;
-	bgColor: string;
-	txtColor : string;
-	taptapSeq : number;
-};
-
-type MainVisualProps = {
-	listDatas: MainVisualItemType[];
-};
+import type { MainVisualProps } from '@/types/MainTypes';
 
 gsap.registerPlugin(ScrollTrigger);
 

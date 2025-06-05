@@ -1,19 +1,6 @@
 import ArchiveBoxLnbList from './ArchiveBoxLnbList';
+import type { AlphabetGroupedProps } from '@/types/ArchiveTypes';
 
-type ArchiveListItemType = {
-  imgSrc: string;
-  brandTitle: string;
-  linkUrl: string;
-  magazineNum: string[];
-};
-
-type AlphabetGroupedType = {
-  [key: string]: ArchiveListItemType[];
-};
-
-type AlphabetGroupedProps = {
-  alphabetGrouped: AlphabetGroupedType;
-};
 
 const ArchiveBoxLnb = ({ alphabetGrouped }: AlphabetGroupedProps) => {
   if (!alphabetGrouped || Object.keys(alphabetGrouped).length === 0) return null;

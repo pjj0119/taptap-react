@@ -1,18 +1,7 @@
 import ArchiveBoxConList from './ArchiveBoxConList'
-type ArchiveListItemType = {
-  imgSrc: string;
-  brandTitle: string;
-  linkUrl: string;
-  magazineNum: string[];
-};
+import type { AlphabetGroupedProps } from '@/types/ArchiveTypes';
 
-type AlphabetGroupedType = {
-  [key: string]: ArchiveListItemType[];
-};
 
-type AlphabetGroupedProps = {
-  alphabetGrouped: AlphabetGroupedType;
-};
 const ArchiveBoxCon = ({ alphabetGrouped }: AlphabetGroupedProps) => {
 	return (
 		

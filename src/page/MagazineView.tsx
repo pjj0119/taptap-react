@@ -2,23 +2,12 @@ import { useEffect, useState, useRef } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import type { isMobileProps } from '@/types/IsMobileTypes';
+import type { MagazineViewData, MagazineViewImage } from '@/types/MagazineViewTypes';
 
 gsap.registerPlugin(ScrollTrigger);
 
-type isMobileProps = {
-  isMobile: boolean;
-};
 
-type MagazineViewData = {
-  hashTags?: string[];
-  title: string;
-  postNum: number;
-};
-
-type MagazineViewImage = {
-  imgUrl: string;
-  regDtm: Date;
-};
 
 export default function MagazineView({ isMobile }: isMobileProps) {
   const { pageNum } = useParams();

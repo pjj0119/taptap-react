@@ -2,18 +2,10 @@
 import { useEffect, useState } from 'react';
 import ArchiveBoxLnb from '../component/archive/ArchiveBoxLnb'
 import ArchiveBoxCon from '../component/archive/ArchiveBoxCon'
+import type { ArchiveListItemType } from '@/types/ArchiveTypes';
+import type { isMobileProps } from '@/types/IsMobileTypes';
 
 
-type isMobileProps = {
-	isMobile: boolean;
-};
-
-type ArchiveListItemType = {
-	imgSrc: string;
-	brandTitle: string;
-	linkUrl: string;
-	magazineNum: string[];
-};
 const Archive = ({isMobile} : isMobileProps) => {
 	
 		const [alphabetGrouped, setAlphabetGrouped] = useState<Record<string, ArchiveListItemType[]>>({});
@@ -38,6 +30,7 @@ const Archive = ({isMobile} : isMobileProps) => {
 							brandTitle: item.brandTitle,
 							linkUrl: item.linkUrl,
 							magazineNum: [...new Set((item.magazineFkSeq ?? '').split(',').map((tag: string) => tag.trim()).filter((tag: string) => tag !== ''))],
+							postNums: item.connectedMagazines?.map((magazine:any) => magazine.postNum),
 						}));
 					});
 

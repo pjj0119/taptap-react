@@ -1,9 +1,6 @@
 import { Link } from 'react-router-dom';
+import type { pageTitProps } from '@/types/LayputTypes';
 
-
-type pageTitProps = {
-	pageTit: string;
-};
 const HeaderGnb = ({pageTit} :pageTitProps) => {
 	return (
 		<nav className="header__gnb">

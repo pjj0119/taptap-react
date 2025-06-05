@@ -1,15 +1,7 @@
 import { Link } from 'react-router-dom';
 import { forwardRef } from 'react';
+import type { MainVisualItemType } from '@/types/MainTypes';
 
-type MainVisualItemType = {
-	imgSrc: string;
-	volume: number;
-	desc: string;
-	bgColor: string;
-	txtColor: string;
-	taptapSeq : number;
-	isFirst? : boolean
-};
 
 
 const MainVisualItem = forwardRef<HTMLDivElement, MainVisualItemType>(

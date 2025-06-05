@@ -3,13 +3,10 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import type { isMobileProps } from '@/types/IsMobileTypes';
 
 
 gsap.registerPlugin(ScrollTrigger);
-
-type isMobileProps = {
-	isMobile: boolean;
-};
 
 const About = ({isMobile} : isMobileProps) => {
 	

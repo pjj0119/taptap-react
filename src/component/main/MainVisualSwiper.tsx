@@ -6,20 +6,8 @@ import MainVisualTitle from './MainVisualTitle';
 import { Swiper, SwiperSlide } from 'swiper/react';
 // import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
+import type { MainVisualProps } from '@/types/MainTypes';
 
-type MainVisualItemType = {
-	imgSrc: string;
-	volume: number;
-	desc: string;
-	bgColor: string;
-	txtColor : string;
-	taptapSeq : number;
-};
-
-type MainVisualProps = {
-	isMobile: boolean;
-	listDatas: MainVisualItemType[];
-};
 
 
 const MainVisualSwiper = ({ isMobile, listDatas }: MainVisualProps) => {
