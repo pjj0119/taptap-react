@@ -12,11 +12,8 @@ export type AlphabetGroupedType = {
 
 
 export type AlphabetGroupedProps = {
-  alphabetGrouped: {
-    [key: string]: ArchiveListItemType[];
-  };
+  alphabetGrouped: AlphabetGroupedType;
 };
-
 
 export type AlphabetGroupedPropsItems = {
   alphabetGroupedItems: ArchiveListItemType[];

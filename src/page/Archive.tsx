@@ -42,8 +42,8 @@ const Archive = ({isMobile} : isMobileProps) => {
 						grouped[char.toLowerCase()] = results[i];
 					});
 
-					console.log(results)
-					console.log(grouped)
+					// console.log(results)
+					// console.log(grouped)
 					setAlphabetGrouped(grouped);
 				} catch (err) {
 					console.error('아카이브 전체 로딩 실패:', err);
