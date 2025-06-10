@@ -35,35 +35,35 @@ const About = ({isMobile} : isMobileProps) => {
 			headerRef.current = document.querySelector('.header') as HTMLElement;
 			headerLogoRef.current = document.querySelector('.header__logo');
 
-			const header = headerRef.current;
-			const headerLogo = headerLogoRef.current;
+			// const header = headerRef.current;
+			// const headerLogo = headerLogoRef.current;
 
-			const headerHeight = header?.offsetHeight || 0;
+			// const headerHeight = header?.offsetHeight || 0;
 			// const windowHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
 
 			itemRefs.current.forEach((e) => {
 				if (!e) return;
-				const txtcolor = e.dataset.txtcolor;
+				// const txtcolor = e.dataset.txtcolor;
 
-				const headerTrigger = ScrollTrigger.create({
-					trigger: e,
-					start: !isMobile ? `top top+=${headerHeight * 2}` : `top top+=${headerHeight}`,
-					end: !isMobile ? `bottom top+=${headerHeight * 2}` : `bottom top+=${headerHeight}`,
-					// markers: true,
-					onEnter: () => {
-						if (header && txtcolor) {
-							header.style.color = txtcolor;
-							headerLogo?.classList.toggle('white', txtcolor.toLowerCase() === 'white');
-						}
-					},
-					onEnterBack: () => {
-						if (header && txtcolor) {
-							header.style.color = txtcolor;
-							headerLogo?.classList.toggle('white', txtcolor.toLowerCase() === 'white');
-							e.classList.add('active');
-						}
-					},
-				});
+				// const headerTrigger = ScrollTrigger.create({
+				// 	trigger: e,
+				// 	start: !isMobile ? `top top+=${headerHeight * 2}` : `top top+=${headerHeight}`,
+				// 	end: !isMobile ? `bottom top+=${headerHeight * 2}` : `bottom top+=${headerHeight}`,
+				// 	// markers: true,
+				// 	onEnter: () => {
+				// 		if (header && txtcolor) {
+				// 			header.style.color = txtcolor;
+				// 			headerLogo?.classList.toggle('white', txtcolor.toLowerCase() === 'white');
+				// 		}
+				// 	},
+				// 	onEnterBack: () => {
+				// 		if (header && txtcolor) {
+				// 			header.style.color = txtcolor;
+				// 			headerLogo?.classList.toggle('white', txtcolor.toLowerCase() === 'white');
+				// 			e.classList.add('active');
+				// 		}
+				// 	},
+				// });
 
 				const itemRefsTrigger = ScrollTrigger.create({
 					trigger: e,
@@ -83,7 +83,8 @@ const About = ({isMobile} : isMobileProps) => {
 					onLeaveBack: () => e.classList.remove('active'),
 				});
 
-				killListRef.current.push(headerTrigger, itemRefsTrigger);
+				// killListRef.current.push(headerTrigger, itemRefsTrigger);
+				killListRef.current.push( itemRefsTrigger);
 			});
 
 			

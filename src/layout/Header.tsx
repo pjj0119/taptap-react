@@ -23,7 +23,7 @@ const Header = ({ isMobile, isClicked, setIsClicked }: HeaderProps) => {
 
 
 	return (
-		<header id='header' className={`header ${pageTit == 'Magazine' ? 'bgwt': ''}`}>
+		<header id='header' className={`header ${pageTit == 'Magazine' || 'About' ? 'bgwt': ''}`}>
 			<div className='headerInner'>
 				<HeaderLogo />
 				{!isMobile && <HeaderGnb pageTit={pageTit} />}
