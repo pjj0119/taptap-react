@@ -286,16 +286,17 @@
 				justify-content: space-between;
 				padding: 0 24px;
 				box-sizing: border-box;
-
+				&.white{
+					.tit,
+					.pageNum{color: $font-color-white;}
+				}
 				.tit {
-					color: $font-color-white;
 					font-size: 16px;
 					font-weight: 500;
 					&.ani{opacity: 1;}
 				}
 
 				.pageNum {
-					color: $font-color-white;
 					font-size: 16px;
 					font-weight: 600;
 					display: flex;

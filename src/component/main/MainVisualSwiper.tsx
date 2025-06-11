@@ -15,13 +15,18 @@ const MainVisualSwiper = ({ isMobile, listDatas }: MainVisualProps) => {
 	const [currentIndex, setCurrentIndex] = useState(1);
 	const updateHeaderClass = (swiper: any) => {
 		const header = document.querySelector('.header__logo');
-		if (!header) return;
+		const title = document.querySelector('.mainBox__visual__title ');
+		if (!header || !title) return;
 		
 
 		const activeSlide = swiper.slides[swiper.activeIndex];
-		const hasWhiteText = activeSlide?.querySelector('[data-txtcolor="White"]');
+		const hasWhiteText = !!activeSlide?.querySelector('[data-txtcolor="White"]');
+		header.classList.toggle('white', hasWhiteText);
 		
-		header.classList.toggle('white', !!hasWhiteText);
+		// title.classList.toggle('white', hasWhiteText);
+		const vol = listDatas?.[swiper.realIndex];
+		const vol7 = Number(vol?.volume) === 7;
+		title.classList.toggle('white', hasWhiteText || vol7);
 
 	};
 	return (
