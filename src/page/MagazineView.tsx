@@ -85,63 +85,61 @@ export default function MagazineView({ isMobile }: isMobileProps) {
 	fetchData();
   }, [pageNum, navigate]);
 
-  useEffect(() => {
-	headerRef.current = document.querySelector('.header');
-	if (!headerRef.current) return;
+	useEffect(() => {
+		headerRef.current = document.querySelector('.header');
+		if (!headerRef.current) return;
 
-	const headerHeight = headerRef.current.offsetHeight;
-	const titBoxStickyInfoHeight = titBoxStickyInfo.current?.offsetHeight;
-	
-	if (titBoxSticky.current) {
-		titBoxSticky.current.style.paddingTop = `${headerHeight}px`;
-	}
-	if (flxbarTitBox.current) {
-		flxbarTitBox.current.style.top = `${headerHeight}px`;
-	}
+		const updateLayout = () => {
+			const headerHeight = headerRef.current?.offsetHeight || 0;
+			const titBoxStickyInfoHeight = titBoxStickyInfo.current?.offsetHeight || 0;
 
+			if (titBoxSticky.current) {
+			titBoxSticky.current.style.paddingTop = `${headerHeight}px`;
+			}
+			if (flxbarTitBox.current) {
+			flxbarTitBox.current.style.top = `${headerHeight}px`;
+			}
 
-	
-	const gsap = () => {
-		ScrollTrigger.create({
+			// 기존 트리거 모두 제거 후 새로 생성
+			ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+
+			ScrollTrigger.create({
 			trigger: titBoxSticky.current,
 			start: `top+=${headerHeight} top+=${headerHeight}`,
-			// markers : true,
 			onEnter: () => {
-				if(viewnBox.current && titBoxStickyInfoHeight){
-					viewnBox.current.style.marginTop = `-${titBoxStickyInfoHeight - 100}px`
+				if (viewnBox.current) {
+				viewnBox.current.style.marginTop = `-${titBoxStickyInfoHeight - 100}px`;
+				viewnBox.current.classList.add('on');
 				}
-				viewnBox.current?.classList.add('on');
 				titBoxStickyInfo.current?.classList.add('on');
 				flxbarTitBox.current?.classList.add('on');
 				flxbarBox.current?.classList.add('on');
 			},
 			onLeaveBack: () => {
-				
-				if(viewnBox.current){
-					viewnBox.current.style.marginTop = "0"
+				if (viewnBox.current) {
+				viewnBox.current.style.marginTop = "0";
+				viewnBox.current.classList.remove('on');
 				}
-				viewnBox.current?.classList.remove('on');
 				titBoxStickyInfo.current?.classList.remove('on');
 				flxbarTitBox.current?.classList.remove('on');
 				flxbarBox.current?.classList.remove('on');
-				
 			},
-		});
-	}
+			});
+		};
 
-	if(!isMobile){
-		gsap();	
+		if (!isMobile) {
+			updateLayout();
 
-		const handleResize = () => ScrollTrigger.refresh();
-		window.addEventListener('resize', () => {
-			handleResize();
-			
-			gsap()
-		});
-		return () => window.removeEventListener('resize', handleResize);
-	
-	}
-  }, [magazineView]);
+			window.addEventListener('resize', updateLayout);
+
+			return () => {
+			window.removeEventListener('resize', updateLayout);
+			ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+			};
+		}
+	}, [magazineView]);
+
+
 
   if (!magazineView) return null;
 
