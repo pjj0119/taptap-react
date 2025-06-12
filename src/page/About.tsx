@@ -67,7 +67,7 @@ const About = ({isMobile} : isMobileProps) => {
 
 				const itemRefsTrigger = ScrollTrigger.create({
 					trigger: e,
-					start: !isMobile ? `top 50%` : `-20% 50%`,
+					start: !isMobile ? `top 70%` : `-20% 60%`,
 					// markers: true,
 					onEnter: () => e.classList.add('active'),
 					onEnterBack: () => {
