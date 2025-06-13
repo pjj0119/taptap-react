@@ -30,7 +30,9 @@ const Archive = ({isMobile} : isMobileProps) => {
 							brandTitle: item.brandTitle,
 							linkUrl: item.linkUrl,
 							magazineNum: [...new Set((item.magazineFkSeq ?? '').split(',').map((tag: string) => tag.trim()).filter((tag: string) => tag !== ''))],
-							postNums: item.connectedMagazines?.map((magazine:any) => magazine.postNum),
+							postNums: (item.connectedMagazines ?? []).filter((magazine: any) => magazine && magazine.postNum != null).map((magazine: any) => magazine.postNum),
+
+
 						}));
 					});
 
@@ -42,7 +44,7 @@ const Archive = ({isMobile} : isMobileProps) => {
 						grouped[char.toLowerCase()] = results[i];
 					});
 
-					// console.log(results)
+					console.log(results)
 					// console.log(grouped)
 					setAlphabetGrouped(grouped);
 				} catch (err) {
