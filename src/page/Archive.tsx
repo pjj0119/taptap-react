@@ -40,7 +40,7 @@ const Archive = ({isMobile} : isMobileProps) => {
 
 
 					const grouped: Record<string, ArchiveListItemType[]> = {};
-					
+
 					alphabetList.forEach((char, i) => {
 						const data = results[i];
 
@@ -49,7 +49,7 @@ const Archive = ({isMobile} : isMobileProps) => {
 						? data.sort((a, b) => {
 							const aChar = a.brandTitle?.substring(1) || '';
 							const bChar = b.brandTitle?.substring(1) || '';
-							return aChar.localeCompare(bChar); // 오름차순
+							return aChar.localeCompare(bChar);
 							})
 						: [];
 
