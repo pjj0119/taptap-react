@@ -54,6 +54,7 @@
 						li{
 							font-size: 20px;
 							cursor: pointer;
+							a{text-transform: uppercase;}
 						}
 					}
 				}
@@ -111,6 +112,7 @@
 							dt{
 								font-size: 24px;
 								font-weight: 500;
+								text-transform: uppercase;
 							}
 							dd{
 								margin-top: 8px;
