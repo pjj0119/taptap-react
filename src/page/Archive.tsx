@@ -40,11 +40,27 @@ const Archive = ({isMobile} : isMobileProps) => {
 
 
 					const grouped: Record<string, ArchiveListItemType[]> = {};
-						alphabetList.forEach((char, i) => {
-						grouped[char.toLowerCase()] = results[i];
-					});
+					
+					alphabetList.forEach((char, i) => {
+						const data = results[i];
 
-					console.log(results)
+						//해당 알파벳 안에 내용 오름차순
+						const dataSubstring = Array.isArray(data)
+						? data.sort((a, b) => {
+							const aChar = a.brandTitle?.substring(1) || '';
+							const bChar = b.brandTitle?.substring(1) || '';
+							return aChar.localeCompare(bChar); // 오름차순
+							})
+						: [];
+
+						//해당 알파벳 내용이 없는 배열 넣기
+						// grouped[char.toLowerCase()] = Array.isArray(data) ? dataSubstring : [];
+
+						//해당 알파벳 내용이 없는 배열 빼기
+						if (Array.isArray(data) && data.length > 0) {
+							grouped[char.toLowerCase()] = dataSubstring;
+						}
+					});
 					// console.log(grouped)
 					setAlphabetGrouped(grouped);
 				} catch (err) {
