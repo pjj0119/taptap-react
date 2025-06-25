@@ -40,7 +40,7 @@ export default function MagazineView({ isMobile }: isMobileProps) {
 
 		const url = isDev
 		  ? '/magazineApi/tabtabItemList?boardTyp=taptap'
-		  : 'http://taptap.inpix.com/front/ajax/tabtabItemList?boardTyp=taptap';
+		  : 'https://taptap.inpix.com/front/ajax/tabtabItemList?boardTyp=taptap';
 
 		const res = await fetch(url, {
 			method: 'GET',
@@ -73,7 +73,7 @@ export default function MagazineView({ isMobile }: isMobileProps) {
 		});
 
 		setMagazineViewImg({
-		  imgUrl: `http://taptap.inpix.com/upload/magazine/${viewImg.attachmentPhgsFileNm}`,
+		  imgUrl: `https://taptap.inpix.com/upload/magazine/${viewImg.attachmentPhgsFileNm}`,
 		  regDtm: new Date(viewImg.regDtm),
 		});
 	  } catch (err) {

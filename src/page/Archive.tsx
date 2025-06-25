@@ -16,7 +16,7 @@ const Archive = ({isMobile} : isMobileProps) => {
 
 		//아카이브 데이터
 		useEffect(() => {
-			const baseUrl = isDev ? '/archiveApi' : 'http://taptap.inpix.com/front/ajax';
+			const baseUrl = isDev ? '/archiveApi' : 'https://taptap.inpix.com/front/ajax';
 
 			const fetchAllList = async () => {
 			try {
@@ -26,7 +26,7 @@ const Archive = ({isMobile} : isMobileProps) => {
 					const data = await res.json();
 
 						return data.ITEMLIST.map((item: any) => ({
-							imgSrc: `http://taptap.inpix.com/upload/archive/${item.attPhgsFileNm}`,
+							imgSrc: `https://taptap.inpix.com/upload/archive/${item.attPhgsFileNm}`,
 							brandTitle: item.brandTitle,
 							linkUrl: item.linkUrl,
 							magazineNum: [...new Set((item.magazineFkSeq ?? '').split(',').map((tag: string) => tag.trim()).filter((tag: string) => tag !== ''))],

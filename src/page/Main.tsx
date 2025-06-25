@@ -18,7 +18,7 @@ const Main = ({ isMobile }: isMobileProps) => {
 
 				const url = isDev
 					? '/magazineApi/tabtabItemList?boardTyp=taptap'
-  					: 'http://taptap.inpix.com/front/ajax/tabtabItemList?boardTyp=taptap';
+  					: 'https://taptap.inpix.com/front/ajax/tabtabItemList?boardTyp=taptap';
 
 				
 				const res = await fetch(url, {
@@ -30,7 +30,7 @@ const Main = ({ isMobile }: isMobileProps) => {
 				const list = data.ITEMLIST.slice(0,3).map((list: any) => ({
 					volume: list.postNum,
 					desc: list.title,
-					imgSrc: `http://taptap.inpix.com/upload/magazine/${list.attPhgsFileNm}`,
+					imgSrc: `https://taptap.inpix.com/upload/magazine/${list.attPhgsFileNm}`,
 					bgColor: list.bgColor,
 					txtColor: list.txtColor,
 					taptapSeq : list.taptapSeq ,
