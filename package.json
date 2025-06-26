@@ -7,7 +7,8 @@
     "d": "vite",
     "b": "tsc -b && vite build",
     "lint": "eslint .",
-    "p": "vite preview"
+    "p": "vite preview",
+    "push:all": "git push origin main && git push second main"
   },
   "dependencies": {
     "gsap": "^3.13.0",
