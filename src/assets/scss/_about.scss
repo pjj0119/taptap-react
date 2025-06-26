@@ -1,0 +1,588 @@
+@use './import' as *;
+
+.aboutBox{
+	overflow: hidden;
+	&.active{
+		@include fadeIn( 0.5s, 1s, linear);
+	}
+	.aboutBox__sectionInner{
+		max-width: 1776px;
+		margin: auto;
+		
+		.left{
+			flex: 1;
+		}
+		.right{
+			flex: 1.4719;
+		}
+	}
+	.aboutBox__section--1{
+		padding-bottom: 92px;
+		.txtBox{
+			display: flex;
+			justify-content: center;
+			align-items: stretch;
+			gap: 16px;
+			.left{
+				position: relative;
+				p{
+					font-size: 20px;
+					font-weight: 500;
+					color: #8A8A8A;
+					padding-left: 168px;
+					box-sizing: border-box;
+					position: absolute;
+					top: 0;
+					left: calc(100% - 153px);
+					width: max-content;
+					transition: all .75s;
+				}
+				p.on{
+					left: 0;
+				}
+			}
+			.right{
+				dl{
+					transition: all .75s linear;
+					padding-top: 80px;
+					
+					&.on{padding-top: 0;
+						dt{
+							span{
+								&.before{opacity: 0;}
+								&.after{opacity: 1;}
+							}
+						}
+					}
+					dt{
+						font-size: 40px;
+						font-weight: 600;
+						position: relative;
+						span{
+							&.after{
+								position: absolute;
+								top: 0;
+								left: 0;
+								opacity: 0;
+								transition: all .75s linear;
+							}
+						}
+					}
+					dd{
+						margin-top: 20px;
+						font-size: 40px;
+						font-weight: 500;
+						color: $font-color-gray;
+					}
+				}
+			}
+		}
+		.imgBox{
+			display: flex;
+			justify-content: center;
+			gap: 16px;
+			margin-top: 100px;
+			.left,
+			.right{font-size: 0;}
+		}
+	}
+	.aboutBox__section--2{
+		background: linear-gradient(to bottom, #15110F, #1B1513);
+		padding-top: 200px;
+		box-sizing: border-box;
+		&.active{
+			.txtBox{
+				dl{
+					dt{@include fadeInMove('up', 0.5s, 0s, 50px, linear);}
+					dd{@include fadeInMove('up', 0.5s, .3s, 50px, linear);}
+				}
+			}
+		}
+		.txtBox{
+			    display: flex;
+				justify-content: center;
+				align-items: stretch;
+				gap: 16px;
+			dl{
+				dt{
+					font-size: 48px;
+					font-weight: 500;
+					color: $font-color-white;
+				}
+				dd{
+					font-size: 20px;
+					color: #aaa;
+					margin-top: 32px;
+				}
+			}
+		}
+		.imgBox{
+			font-size: 0;
+			margin-top: 14px;
+		}
+	}
+	.aboutBox__section--3{
+		background-color: #F4F4F5;
+		
+		&.active{
+			.right{
+				.speechBubbleBox{
+					.speechBubble{
+						&.black{
+							p{
+								@include fadeInMove('right', 0.5s, 0s, 50px, linear);
+							}
+						}
+						&.white{
+							p{
+								@include fadeInMove('left', 0.5s, 0s, 50px, linear);
+							}
+						}
+					}
+
+				}
+			}
+		}
+		.aboutBox__sectionInner{
+			display: flex;
+			align-items: flex-end;
+			padding: 160px 0 170px;
+			gap: 16px;
+			.left{
+				text-align: center;
+			}
+			.right{
+				.speechBubbleBox{
+					display: inline-block;
+					width: 640px;
+					.speechBubble{
+						position: relative;
+						&::after{
+							content: "";
+							position: absolute;
+							width: 28px;
+							height: 56px;
+							z-index: 1;
+
+						}
+						p{
+							font-size: 32px;
+							font-weight: 500;
+							line-height: 52px;
+							text-align: center;
+						}
+						&.black{
+							background-color: $font-color-default;
+							padding: 48px 0;
+							border-radius:74px;
+							position: relative;
+							z-index: 1;
+							&::after{
+								bottom: -28px;
+								left: 100px;
+								background-color: $font-color-default;
+								border-top-right-radius: 28px;
+								border-bottom-right-radius: 28px;
+							}
+							p{
+								color: $font-color-white;
+							}
+						}
+						&.white{
+							background-color: $font-color-white;
+							padding: 80px 0;
+							border-radius:30px;
+							&::after{
+								bottom: -28px;
+								right: 100px;
+								background-color: $font-color-white;
+								border-top-left-radius: 28px;
+								border-bottom-left-radius: 28px;
+							}
+							p{
+								color: $font-color-default;
+							}
+						}
+					}
+				}
+				.profileBox{
+						margin-top: 88px;
+						display: flex;
+						flex-direction: column;
+						gap: 40px;
+					dl{
+						padding-left: 36px;
+						box-sizing: border-box;
+						display: flex;
+						gap: 20px;
+						align-items: center;
+						dd{
+							font-size: 16px;
+							font-weight: 500;
+							color: #8A8A8A;
+							span{
+								display: block;
+								margin-bottom: 10px;
+								color: $font-color-default;
+								font-weight: 600;
+								font-size: 18px;
+							}
+						}
+					}
+
+				}
+			}
+		}
+	}
+	.aboutBox__section--4{
+		border-bottom: 1px solid $font-color-default;
+		
+		&.active{
+			.textBox{
+				.tit{
+					@include fadeInMove('up', 0.5s, 0s, 50px, linear);
+					}
+				.desc{
+					@include fadeInMove('up', 0.5s, .1s, 50px, linear);
+				}
+				a{
+					@include fadeInMove('up', 0.5s, .2s, 50px, linear);
+				
+				}
+			}
+		}
+		.aboutBox__sectionInner{
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			min-height: 800px;
+		}
+		.textBox{
+			text-align: center;
+			.tit{
+				font-size: 24px;
+				font-weight: 600;
+			}
+			.desc{
+				font-size: 18px;
+				color: #8A8A8A;
+				margin-top: 20px;
+			}
+			a{
+				margin-top: 48px;
+				display: inline-block;
+				font-size: 17px;
+				padding: 16px 32px;
+				color: $font-color-white;
+				background-color: $font-color-default;
+				border-radius: 27px;
+			}
+		}
+	}
+}
+
+.about {
+	& ~ .footer{
+		.footerInner{
+			padding: 60px 219px 40px;
+			&__con{
+				&--right{
+					display: none;
+				}
+			}
+		}
+	}
+}
+
+@mixin footerTablet {
+	.about {
+		& ~ .footer{
+			.footerInner{
+				padding: 60px 124px 40px 60px;
+			}
+		}
+	}
+}
+
+/* 1025 ~ 1279 */
+@include tablet-landscape {
+	@include footerTablet;
+}
+
+/* 768 ~ 1024 */
+@include tablet {
+	.aboutBox {
+		.aboutBox__sectionInner{
+			max-width: none;
+			padding: 0 60px;
+			box-sizing: border-box;
+		}
+		.aboutBox__section--1 {
+			padding-bottom: 138px;
+			.txtBox {
+				.left{
+					p{
+						font-size: 18px;
+						padding-left: 0;
+					}
+				}
+				.right{
+					dl{
+						dt{
+							font-size: 28px;
+						}
+						dd{
+							margin-top: 16px;
+							font-size: 28px;
+						}
+					}
+				}
+			}
+			.imgBox{margin-top: 120px;font-size: 0;}
+		}
+		.aboutBox__section--2{
+			.txtBox {
+				dl{
+					dt{
+						font-size: 32px;
+						line-height: 42px;
+					}
+					dd{
+						font-size: 18px;
+						line-height: 28px;
+					}
+				}
+			}
+			.imgBox{
+				font-size: 0;
+				width: 84%;
+			}
+		}
+		.aboutBox__section--3 {
+			.aboutBox__sectionInner{
+				padding: 120px 90px 138px;
+				.right{
+					.speechBubbleBox{
+						width: 100%;
+						.speechBubble{
+							 p{
+								font-size: 20px;
+								line-height: 30px;
+							 }
+							 &.black{
+								padding: 35px 0;
+							 }
+							 &.white{
+								padding: 50px 0;
+							 }
+						}
+					}
+				}
+			}
+		}
+	}
+	@include footerTablet;
+}
+
+/*  ~ 767 */
+@include mobile {
+	.about ~ .footer .footerInner {
+		padding: 60px 20px 40px;
+	}
+	.aboutBox {
+		
+		&.active{
+			@include fadeInMove('up', 0.5s, 1s, 25px, linear);
+		}
+		.aboutBox__sectionInner{
+			max-width: none;
+			padding: 0 20px;
+			box-sizing: border-box;
+		}
+		.aboutBox__section--1 {
+			padding-bottom: 120px;
+			.txtBox{
+				flex-direction: column;
+				gap: 80px;
+				.left{
+					p{
+						position: static;
+						font-size: 16px;
+						padding-left: 0;
+					}
+				}
+				.right{
+					dl{
+						padding-top: 0;
+						dt{
+							font-size: 24px;
+							span{
+								&.after{
+									position: static;
+									opacity: 1;
+								}
+							}
+						}
+						dd{
+							margin-top: 8px;
+							font-size: 24px;
+						}
+					}
+				}
+			}
+			.imgBox{
+				flex-direction: column;
+				gap: 12px;
+				margin-top: 40px;
+				font-size: 0;
+				img{
+					width: 100%;
+				}
+			}
+		}
+		.aboutBox__section--2{
+			padding-top: 120px;
+			padding-bottom: 80px;
+			
+			&.active{
+				.txtBox{
+					dl{
+						dt{@include fadeInMove('up', 0.5s, 0s, 25px, linear);}
+						dd{@include fadeInMove('up', 0.5s, .3s, 25px, linear);}
+					}
+				}
+			}
+			.txtBox {
+				dl{
+					dt{
+						font-size: 28px;
+						line-height: 38px;
+					}
+					dd{
+						margin-top: 32px;
+						font-size: 16px;
+						line-height: 26px;
+					}	
+				}
+			}
+			.imgBox{
+				width: 100%;
+				margin-top: 60px;
+			}
+		}
+		.aboutBox__section--3{
+			
+			&.active{
+				.right{
+					.speechBubbleBox{
+						.speechBubble{
+							&.black{
+								p{
+									@include fadeInMove('right', 0.5s, 0s, 50px, linear);
+								}
+							}
+							&.white{
+								p{
+									@include fadeInMove('left', 0.5s, 0s, 50px, linear);
+								}
+							}
+						}
+
+					}
+				}
+			}
+			.aboutBox__sectionInner{
+				padding: 120px 24px;
+				.right {
+					.speechBubbleBox {
+						width: 100%;
+						display: block;
+						.speechBubble{
+							&::after{
+								width: 16px;
+								height: 32px;
+							}
+							&.black{
+								padding: 25px 0;
+								&::after{
+									bottom: -16px;
+									left: 50px;
+									border-top-right-radius: 16px;
+    								border-bottom-right-radius: 16px;
+								}
+								p{
+									font-size: 18px;
+									line-height: 26px;
+								}
+							}
+							&.white{
+								padding: 36px 0;
+								border-radius: 45px;
+								&::after{
+									bottom: -16px;
+									right: 50px;
+									border-top-left-radius: 16px;
+    								border-bottom-left-radius: 16px;
+								}
+								p{
+									font-size: 18px;
+									line-height: 26px;
+								}
+							}
+						}
+					}
+					.imgBox{
+						width: 234px;
+						margin: 88px auto 0;
+					}
+					.profileBox{
+						margin-top: 60px;
+						dl{
+							padding-left: 0;
+							dt{
+								flex-shrink: 0;
+								flex-basis: 56px;
+								flex-grow: 0;
+							}
+							dd{
+								font-size: 15px;
+								span{font-size: 17px;margin-bottom: 8px;}
+							}
+						}
+					}
+				}
+			}
+		}
+		.aboutBox__section--4{
+			
+			&.active{
+				.textBox{
+					.tit{
+						@include fadeInMove('up', 0.5s, .0s, 25px, linear);
+						}
+					.desc{
+						@include fadeInMove('up', 0.5s, .1s, 25px, linear);
+					}
+					a{
+						@include fadeInMove('up', 0.5s, .2s, 25px, linear);
+					
+					}
+				}
+			}
+			.aboutBox__sectionInner{
+				min-height: 510px;
+			}
+			.textBox{
+				.desc{
+					font-size: 15px;
+					margin-top: 16px;
+				}
+				a{
+					font-size: 14px;
+					margin-top: 32px;
+					padding: 16px 25px;
+				}
+			}
+		}
+	}
+}
