@@ -60,7 +60,7 @@
 				}
 			}
 		}
-		&__con{
+		&__con{overflow: hidden;
 			flex: 1;
 			&__tit{
 				p{
@@ -118,6 +118,7 @@
 								margin-top: 8px;
 								font-size: 18px;
 								color: $font-color-gray;
+								a{word-break: break-all;}
 							}
 						}
 						.linkBox{

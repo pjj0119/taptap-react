@@ -239,9 +239,6 @@
 @include mobile {
 	.magazine{
 		.magazineBox{
-			&.active{
-				@include fadeInMove('up', 0.5s, 1s, 25px, linear);
-			}
 			&__list{
 				&__item{
 					a{
@@ -274,18 +271,19 @@
 				}
 			}
 			&__sticky{
+				position: sticky; 
+				top: 55px;
+				left: 0;
+				right: 0;
+				margin: auto;
+				background-color: $font-color-white;
+				z-index: 1;
 				
 				&__infoFix{
 				
 					.flex{
 						padding: 15px 20px; 
 					}
-					position: sticky; 
-					top: 55px;
-					left: 0;
-					right: 0;
-					margin: auto;
-					background-color: $font-color-white;
 					&__left{
 						.vol,
 						.date{font-size: 14px;}
@@ -298,14 +296,12 @@
 						}
 					}
 					
-					&.fixed{
-						& + .magazineBox__view__con{
-							padding: 48px 0 80px;
-						}
-					}
 				}
 			}
 			&__view{
+				&.active{
+					@include fadeInMove('up', 0.5s, 1s, 25px, linear);
+				}
 				&__infoFix{
 				
 					.flex{
@@ -335,7 +331,7 @@
 						}
 					}
 				}
-				&__con{padding: 0 0 80px;
+				&__con{padding: 55px 0 80px;
 					&__img{max-width: none; padding-top: 0;}
 					&__topBtn{
 						width: 48px;

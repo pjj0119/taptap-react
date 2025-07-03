@@ -145,7 +145,7 @@ export default function MagazineView({ isMobile }: isMobileProps) {
 
   return (
 	<div id="contents" className="magazine">
-	  <div className={`magazineBox active ani`}>
+	  <div className={`magazineBox${!isMobile ? ' active ani' : ''}`}>
 		
 		<div className="magazineBox__sticky" ref={titBoxSticky}>
 			{!isMobile && (
@@ -190,7 +190,8 @@ export default function MagazineView({ isMobile }: isMobileProps) {
 				</div>
 			)}
 		</div>
-		<div className="magazineBox__view" ref={viewnBox}>
+		
+		<div className={`magazineBox__view${isMobile ? ' active ani' : ''}`} ref={viewnBox}>
 		  {magazineViewImg && (
 			<div className="magazineBox__view__con">
 			  <div className="magazineBox__view__con__img">
