@@ -134,17 +134,17 @@ const About = ({isMobile} : isMobileProps) => {
 						{!isMobile ? 
 						<div className="imgBox">
 							<div className="left">
-								<img src="/front/images/about/img_about01.png" alt="" />
+								{/* <img src="/front/images/about/img_about01.png" alt="" /> */}
 							</div>
 							<div className="right">
-								<img src="/front/images/about/img_about02.png" alt="" />
+								<img src="/front/images/about/img_about02_251118.png" alt="" />
 							</div>
 
 						</div>
 						:
 						<div className="imgBox">
-							<img src="/front/images/about/img_about01_mo.png" alt="" />
-							<img src="/front/images/about/img_about02_mo.png" alt="" />
+							{/* <img src="/front/images/about/img_about01_mo.png" alt="" /> */}
+							<img src="/front/images/about/img_about02_mo_251118.png" alt="" />
 						</div>
 						}
 					</div>
